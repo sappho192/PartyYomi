@@ -50,7 +50,7 @@ namespace PartyYomi
             ChatLogResult readResult = CurrentMemoryHandler.Reader.GetChatLog(_previousArrayIndex, _previousOffset);
             _previousArrayIndex = readResult.PreviousArrayIndex;
             _previousOffset = readResult.PreviousOffset;
-            if (readResult.ChatLogItems.Count > 0)
+            if (!readResult.ChatLogItems.IsEmpty)
             {
                 foreach (var item in readResult.ChatLogItems)
                 {
@@ -59,7 +59,7 @@ namespace PartyYomi
                     if ((int)code < 0x9F) // Skips battle log
                     {
                         if (code == ChatCode.GilReceive || code == ChatCode.Gather || code == ChatCode.FieldAttack || code == ChatCode.EmoteCustom) continue;
-                        ChatQueue.q.Add(item);
+                        ChatQueue.oq.Enqueue(item);
                     }
                 }
                 return true;

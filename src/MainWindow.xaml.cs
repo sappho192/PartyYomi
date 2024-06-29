@@ -12,6 +12,7 @@ using System.Speech.Synthesis;
 using System.Linq;
 using System.Diagnostics;
 using Sharlayan.Core;
+using System.Collections.Specialized;
 
 namespace PartyYomi
 {
@@ -32,31 +33,31 @@ namespace PartyYomi
 
             gameContext = GameContext.Instance();
 
-            const int period = 500;
-            chatTimer = new Timer(UpdateChat, null, 0, period);
+            ChatQueue.ChatLogItems.CollectionChanged += ChatLogItems_CollectionChanged;
         }
 
-        private void UpdateChat(object? state)
+        private void ChatLogItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            if (ChatQueue.q.Any())
+            ChatQueue.oq.TryDequeue(out ChatLogItem? chat);
+            if (chat == null)
             {
-                var chat = ChatQueue.q.Take();
-                int.TryParse(chat.Code, System.Globalization.NumberStyles.HexNumber, null, out var intCode);
-                var code = (ChatCode)intCode;
-                if (code == ChatCode.Party) // || code == ChatCode.Say)
+                return;
+            }
+            int.TryParse(chat.Code, System.Globalization.NumberStyles.HexNumber, null, out var intCode);
+            var code = (ChatCode)intCode;
+            if (code == ChatCode.Party || code == ChatCode.Say)
+            {
+                string line = chat.Line;
+                ChatLogItem decodedChat = chat.Bytes.DecodeAutoTranslate();
+
+                var author = decodedChat.Line.RemoveAfter(":");
+                var sentence = decodedChat.Line.RemoveBefore(":");
+
+                Application.Current.Dispatcher.Invoke(() =>
                 {
-                    string line = chat.Line;
-                    ChatLogItem decodedChat = chat.Bytes.DecodeAutoTranslate();
-
-                    var author = decodedChat.Line.RemoveAfter(":");
-                    var sentence = decodedChat.Line.RemoveBefore(":");
-
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        chatBox.Text += $"{sentence}{Environment.NewLine}";
-                    }); 
-                    tts.SpeakAsync(sentence);
-                }
+                    chatBox.Text += $"{sentence}{Environment.NewLine}";
+                });
+                tts.SpeakAsync(sentence);
             }
         }
 

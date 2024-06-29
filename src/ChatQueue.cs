@@ -1,11 +1,19 @@
-﻿using Sharlayan.Core;
-using System.Collections.Concurrent;
+﻿using ObservableCollections;
+using Sharlayan.Core;
 
 namespace PartyYomi
 {
     public class ChatQueue
     {
-        public static BlockingCollection<ChatLogItem> q = new BlockingCollection<ChatLogItem>(new ConcurrentQueue<ChatLogItem>());
-        public static string lastMsg = "";
+        public static readonly ObservableQueue<ChatLogItem> oq = new();
+
+        private static readonly INotifyCollectionChangedSynchronizedView<ChatLogItem> chatLogItems = oq.CreateView(x => x).ToNotifyCollectionChanged();
+        public static INotifyCollectionChangedSynchronizedView<ChatLogItem> ChatLogItems
+        {
+            get
+            {
+                return chatLogItems;
+            }
+        }
     }
 }
