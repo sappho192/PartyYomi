@@ -1,7 +1,7 @@
 ﻿using ObservableCollections;
 using Sharlayan.Core;
 
-namespace PartyYomi
+namespace PartyYomi.FFXIV
 {
     public class ChatQueue
     {

@@ -2,7 +2,7 @@
 using Sharlayan.Utilities;
 using System.Text;
 
-namespace PartyYomi
+namespace PartyYomi.Helpers
 {
     public static class ByteArrayExtension
     {

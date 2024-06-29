@@ -1,25 +1,24 @@
-﻿using Sharlayan;
-using Sharlayan.Enums;
-using Sharlayan.Models;
+﻿using Sharlayan.Enums;
 using Sharlayan.Models.ReadResults;
+using Sharlayan.Models;
+using Sharlayan;
 using System.Diagnostics;
-using System.Windows;
 
-namespace PartyYomi
+namespace PartyYomi.FFXIV
 {
     public class GameContext
     {
         /* FFXIV stuff */
         public bool Attached { get; }
-        public static MemoryHandler CurrentMemoryHandler { get; set; }
-        private static Process[] processes;
-        private readonly Timer chatTimer;
+        public static MemoryHandler? CurrentMemoryHandler { get; set; }
+        private static Process[]? processes;
+        private readonly Timer? chatTimer;
 
         // For chatlog you must locally store previous array offsets and indexes in order to pull the correct log from the last time you read it.
         private static int _previousArrayIndex = 0;
         private static int _previousOffset = 0;
 
-        private static GameContext _instance;
+        private static GameContext? _instance;
         public static GameContext Instance()
         {
             return _instance ??= new GameContext();
@@ -32,6 +31,7 @@ namespace PartyYomi
             {
                 const int period = 500;
                 chatTimer = new Timer(RefreshChat, null, 0, period);
+                chatTimer.ToString();
                 //Log.Debug($"New RefreshChat timer with period {period}ms");
             }
             else

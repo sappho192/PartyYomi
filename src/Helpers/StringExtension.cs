@@ -1,4 +1,4 @@
-﻿namespace PartyYomi
+﻿namespace PartyYomi.Helpers
 {
     public static class StringExtension
     {

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartyYomi", "PartyYomi.csproj", "{DF280D73-1C3A-4C59-AF94-C86A321A3936}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartyYomi", "PartyYomi.csproj", "{C513FEC2-19A0-49A7-969B-2FD4B12E5F86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DF280D73-1C3A-4C59-AF94-C86A321A3936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF280D73-1C3A-4C59-AF94-C86A321A3936}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF280D73-1C3A-4C59-AF94-C86A321A3936}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF280D73-1C3A-4C59-AF94-C86A321A3936}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C513FEC2-19A0-49A7-969B-2FD4B12E5F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C513FEC2-19A0-49A7-969B-2FD4B12E5F86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C513FEC2-19A0-49A7-969B-2FD4B12E5F86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C513FEC2-19A0-49A7-969B-2FD4B12E5F86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7DE6046E-3124-4173-931A-293CCD56DE22}
+		SolutionGuid = {BAE6879D-73A1-48D7-91E2-1030ACFA5C30}
 	EndGlobalSection
 EndGlobal

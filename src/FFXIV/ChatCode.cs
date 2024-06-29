@@ -1,6 +1,6 @@
 ﻿// referred from https://github.com/NightlyRevenger/TataruHelper/blob/master/FFXIVWpfApp1/Resources/ChatCodes.json
 
-namespace PartyYomi
+namespace PartyYomi.FFXIV
 {
     public enum ChatCode
     {
