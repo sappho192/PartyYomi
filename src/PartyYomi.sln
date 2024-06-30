@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.8.34330.188
+VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartyYomi", "PartyYomi.csproj", "{C513FEC2-19A0-49A7-969B-2FD4B12E5F86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartyYomi", "PartyYomi.csproj", "{323231A1-269A-4E27-A1F9-AAD39800E777}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C513FEC2-19A0-49A7-969B-2FD4B12E5F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C513FEC2-19A0-49A7-969B-2FD4B12E5F86}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C513FEC2-19A0-49A7-969B-2FD4B12E5F86}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C513FEC2-19A0-49A7-969B-2FD4B12E5F86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{323231A1-269A-4E27-A1F9-AAD39800E777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{323231A1-269A-4E27-A1F9-AAD39800E777}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{323231A1-269A-4E27-A1F9-AAD39800E777}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{323231A1-269A-4E27-A1F9-AAD39800E777}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {BAE6879D-73A1-48D7-91E2-1030ACFA5C30}
+		SolutionGuid = {257AFDCB-4CE7-4F59-BBB5-8499F71D1E89}
 	EndGlobalSection
 EndGlobal

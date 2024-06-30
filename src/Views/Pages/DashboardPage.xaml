@@ -16,21 +16,24 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid VerticalAlignment="Top">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
 
-        <ui:Button
-            Grid.Column="0"
-            Command="{Binding ViewModel.CounterIncrementCommand, Mode=OneWay}"
-            Content="Click me!"
-            Icon="Fluent24" />
-        <TextBlock
-            Grid.Column="1"
-            Margin="12,0,0,0"
-            VerticalAlignment="Center"
-            Text="{Binding ViewModel.Counter, Mode=OneWay}" />
+        <Grid Grid.Row="0">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <ui:SymbolIcon
+                    Symbol="{Binding ViewModel.SpeechIcon}"
+                    FontSize="68"/>
+                <ToggleButton HorizontalAlignment="Center" VerticalAlignment="Center"
+                    IsChecked="True"
+                    Command="{Binding ViewModel.SpeechToggleCommand, Mode=OneWay}"
+                    Width="200" Height="100">
+                    <ui:TextBlock Text="{Binding ViewModel.SpeechToggleState}" />
+                </ToggleButton>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>
