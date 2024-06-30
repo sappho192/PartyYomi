@@ -1,5 +1,6 @@
 ﻿using PartyYomi.FFXIV;
 using PartyYomi.Helpers;
+using PartyYomi.Models.Settings;
 using Sharlayan.Core;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -26,7 +27,7 @@ namespace PartyYomi.ViewModels.Windows
         private void ChatLogItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             ChatQueue.oq.TryDequeue(out ChatLogItem? chat);
-            if (chat == null)
+            if (chat == null || !PartyYomiSettings.Instance.UiSettings.IsTtsEnabled)
             {
                 return;
             }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PartyYomi.Models.Settings;
 using PartyYomi.Services;
 using PartyYomi.ViewModels.Pages;
 using PartyYomi.ViewModels.Windows;
@@ -10,6 +11,8 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
 using Wpf.Ui;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace PartyYomi
 {
@@ -70,7 +73,31 @@ namespace PartyYomi
         /// </summary>
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            LoadSettings();
+
             _host.Start();
+        }
+
+        private static void LoadSettings()
+        {
+            var fileName = "settings.yaml";
+            if (!File.Exists(fileName))
+            {
+                var settings = PartyYomiSettings.CreateDefault();
+                PartyYomiSettings.InitializeSettingsChangedEvent(settings);
+                PartyYomiSettings.Instance = settings;
+            }
+            else
+            {
+                var deserializer = new DeserializerBuilder()
+                                    .WithNamingConvention(UnderscoredNamingConvention.Instance)
+                                    .Build();
+                var settings = deserializer.Deserialize<Models.Settings.PartyYomiSettings>(
+                    File.ReadAllText("settings.yaml")
+                );
+                PartyYomiSettings.InitializeSettingsChangedEvent(settings);
+                PartyYomiSettings.Instance = settings;
+            }
         }
 
         /// <summary>

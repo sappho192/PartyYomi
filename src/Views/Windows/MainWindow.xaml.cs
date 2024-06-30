@@ -1,4 +1,5 @@
-﻿using PartyYomi.ViewModels.Windows;
+﻿using PartyYomi.Models.Settings;
+using PartyYomi.ViewModels.Windows;
 using Wpf.Ui;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
@@ -21,6 +22,15 @@ namespace PartyYomi.Views.Windows
             SystemThemeWatcher.Watch(this);
 
             InitializeComponent();
+
+            if (PartyYomiSettings.Instance.UiSettings.Theme == PartyYomiTheme.Dark)
+            {
+                ApplicationThemeManager.Apply(ApplicationTheme.Dark);
+            } else if (PartyYomiSettings.Instance.UiSettings.Theme == PartyYomiTheme.Light)
+            {
+                ApplicationThemeManager.Apply(ApplicationTheme.Light);
+            }
+
             SetPageService(pageService);
 
             navigationService.SetNavigationControl(RootNavigation);

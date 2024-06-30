@@ -45,6 +45,16 @@
             Margin="0,24,0,0"
             FontSize="20"
             FontWeight="Medium"
+            Text="Game" />
+        <TextBlock Margin="0,12,0,0" Text="Player name(s)" />
+        <DataGrid Name="dgPlayerInfos"
+            CanUserAddRows="False"
+            ItemsSource="{Binding ViewModel.PlayerInfos, Mode=TwoWay}"/>
+
+        <TextBlock
+            Margin="0,24,0,0"
+            FontSize="20"
+            FontWeight="Medium"
             Text="About PartyYomi" />
         <TextBlock Margin="0,12,0,0" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
     </StackPanel>

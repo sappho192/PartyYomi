@@ -1,4 +1,6 @@
-﻿using Wpf.Ui.Appearance;
+﻿using PartyYomi.Models.Settings;
+using System.Windows.Data;
+using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
 
 namespace PartyYomi.ViewModels.Pages
@@ -12,6 +14,9 @@ namespace PartyYomi.ViewModels.Pages
 
         [ObservableProperty]
         private ApplicationTheme _currentTheme = ApplicationTheme.Unknown;
+
+        [ObservableProperty]
+        private List<PlayerInfo> _playerInfos = PartyYomiSettings.Instance.ChatSettings.PlayerInfos;
 
         public void OnNavigatedTo()
         {
@@ -46,6 +51,7 @@ namespace PartyYomi.ViewModels.Pages
 
                     ApplicationThemeManager.Apply(ApplicationTheme.Light);
                     CurrentTheme = ApplicationTheme.Light;
+                    PartyYomiSettings.Instance.UiSettings.Theme = PartyYomiTheme.Light;
 
                     break;
 
@@ -55,6 +61,7 @@ namespace PartyYomi.ViewModels.Pages
 
                     ApplicationThemeManager.Apply(ApplicationTheme.Dark);
                     CurrentTheme = ApplicationTheme.Dark;
+                    PartyYomiSettings.Instance.UiSettings.Theme = PartyYomiTheme.Dark;
 
                     break;
             }

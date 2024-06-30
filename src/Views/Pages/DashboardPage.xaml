@@ -28,7 +28,7 @@
                     Symbol="{Binding ViewModel.SpeechIcon}"
                     FontSize="68"/>
                 <ToggleButton HorizontalAlignment="Center" VerticalAlignment="Center"
-                    IsChecked="True"
+                    IsChecked="{Binding ViewModel.IsSpeechActive, Mode=TwoWay}"
                     Command="{Binding ViewModel.SpeechToggleCommand, Mode=OneWay}"
                     Width="200" Height="100">
                     <ui:TextBlock Text="{Binding ViewModel.SpeechToggleState}" />

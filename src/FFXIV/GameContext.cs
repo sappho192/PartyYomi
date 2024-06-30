@@ -101,7 +101,7 @@ namespace PartyYomi.FFXIV
                 CurrentMemoryHandler = SharlayanMemoryManager.Instance.AddHandler(configuration);
 
                 //Log.Debug($"Attached {processName}.exe ({gameLanguage})");
-                MessageBox.Show($"파티요미를 실행합니다.");
+                //MessageBox.Show($"파티요미를 실행합니다.");
 
                 return true;
             }
