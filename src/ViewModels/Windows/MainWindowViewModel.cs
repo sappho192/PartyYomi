@@ -81,7 +81,7 @@ namespace PartyYomi.ViewModels.Windows
         {
             new NavigationViewItem()
             {
-                Content = "Home",
+                Content = "PartyYomi",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
                 TargetPageType = typeof(Views.Pages.DashboardPage)
             },
