@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="DashboardPage"
+    Style="{StaticResource PageAll}"
     d:DataContext="{d:DesignInstance local:DashboardPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -18,22 +19,64 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2.5*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0">
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <ui:SymbolIcon
+        <Grid Margin="0,48,0,0" Grid.Row="0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <ui:SymbolIcon
+                    Grid.Column="0"
                     Symbol="{Binding ViewModel.SpeechIcon}"
-                    FontSize="68"/>
-                <ToggleButton HorizontalAlignment="Center" VerticalAlignment="Center"
+                    FontSize="80"/>
+            <StackPanel Grid.Column="1"
+                VerticalAlignment="Center" HorizontalAlignment="Left">
+                <ui:ToggleSwitch 
                     IsChecked="{Binding ViewModel.IsSpeechActive, Mode=TwoWay}"
-                    Command="{Binding ViewModel.SpeechToggleCommand, Mode=OneWay}"
-                    Width="200" Height="100">
-                    <ui:TextBlock Text="{Binding ViewModel.SpeechToggleState}" />
-                </ToggleButton>
+                    Command="{Binding ViewModel.SpeechToggleCommand, Mode=OneWay}"/>
+                <Border Height="16"/>
+                <ui:TextBlock FontTypography="Subtitle" Text="{Binding ViewModel.SpeechToggleState}" />
+                <ui:TextBlock FontTypography="Caption" Text="{Binding ViewModel.SpeechToggleDescription}" />
             </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <ui:Card VerticalAlignment="Top" Margin="16">
+                    <StackPanel Orientation="Vertical">
+                        <DockPanel>
+                            <ui:Button DockPanel.Dock="Right" Command="{Binding ViewModel.NavigateToSettingsPageCommand}">
+                                <ui:SymbolIcon Symbol="Settings16" FontSize="16"/>
+                            </ui:Button>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:TextBlock FontTypography="BodyStrong" Text="확인하는 채널: "/>
+                                <!--<ui:TextBlock FontTypography="BodyStrong" Text="{Binding ViewModel.EnabledChatChannelCount}"/>-->
+                            </StackPanel>
+                        </DockPanel>
+                        <!--<Border Height="16"/>-->
+                        <ui:ListView ItemsSource="{Binding ViewModel.EnabledChatChannels}" IsEnabled="False"/>
+                    </StackPanel>
+                </ui:Card>
+            </Grid>
+            <Grid Grid.Column="1">
+                <ui:Card Grid.Row="0" VerticalAlignment="Stretch" VerticalContentAlignment="Top" Margin="16">
+                    <StackPanel Orientation="Vertical">
+                        <DockPanel>
+                            <ui:Button DockPanel.Dock="Right" Command="{Binding ViewModel.NavigateToSettingsPageCommand}">
+                                <ui:SymbolIcon Symbol="Settings16" FontSize="16"/>
+                            </ui:Button>
+                            <ui:TextBlock FontTypography="BodyStrong" Text="아래 플레이어들의 채팅은 읽지 않음"/>
+                        </DockPanel>
+                        <Border Height="16"/>
+                        <ui:ListView ItemsSource="{Binding ViewModel.PlayerInfos}" IsEnabled="False"/>
+                    </StackPanel>
+                </ui:Card>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

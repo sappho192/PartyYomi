@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -8,6 +8,7 @@
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DisableFody Condition="'$(Configuration)' == 'Debug'">true</DisableFody>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Costura.Fody" Version="5.7.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="ObservableCollections" Version="2.1.3" />
     <PackageReference Include="RelaxVersioner" Version="3.4.0">
       <PrivateAssets>all</PrivateAssets>
@@ -31,11 +36,23 @@
   <ItemGroup>
     <None Remove="Assets\wpfui-icon-256.png" />
     <None Remove="Assets\wpfui-icon-1024.png" />
+    <None Remove="Fonts\KoPubWorld Dotum Bold.ttf" />
+    <None Remove="Fonts\KoPubWorld Dotum Light.ttf" />
+    <None Remove="Fonts\KoPubWorld Dotum Medium.ttf" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />
+    <Resource Include="Fonts\KoPubWorld Dotum Bold.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\KoPubWorld Dotum Light.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\KoPubWorld Dotum Medium.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

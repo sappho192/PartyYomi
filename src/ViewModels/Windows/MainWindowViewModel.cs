@@ -20,8 +20,11 @@ namespace PartyYomi.ViewModels.Windows
         {
             // Initialize the view model
             InitTTS();
-            gameContext = GameContext.Instance();
-            ChatQueue.ChatLogItems.CollectionChanged += ChatLogItems_CollectionChanged;
+            if ((bool)!PartyYomiSettings.Instance.StandaloneMode)
+            {
+                gameContext = GameContext.Instance();
+                ChatQueue.ChatLogItems.CollectionChanged += ChatLogItems_CollectionChanged;
+            }
         }
 
         private void ChatLogItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -32,14 +35,20 @@ namespace PartyYomi.ViewModels.Windows
                 return;
             }
             int.TryParse(chat.Code, System.Globalization.NumberStyles.HexNumber, null, out var intCode);
-            var code = (ChatCode)intCode;
-            if (code == ChatCode.Party || code == ChatCode.Say)
+            if (PartyYomiSettings.Instance.ChatSettings.ChatChannels.Where(ch => ch.ChatCode == intCode && ch.IsEnabled).Any())
             {
                 string line = chat.Line;
                 ChatLogItem decodedChat = chat.Bytes.DecodeAutoTranslate();
 
                 var author = decodedChat.Line.RemoveAfter(":");
                 var sentence = decodedChat.Line.RemoveBefore(":");
+                foreach (var player in PartyYomiSettings.Instance.ChatSettings.PlayerInfos)
+                {
+                    if (player.Name == author)
+                    {
+                        return;
+                    }
+                }
 
                 //Application.Current.Dispatcher.Invoke(() =>
                 //{
@@ -58,7 +67,7 @@ namespace PartyYomi.ViewModels.Windows
             {
                 if (System.Windows.MessageBox.Show("Microsoft Haruka Desktop 음성을 설치해주세요.") == System.Windows.MessageBoxResult.OK)
                 {
-                    var ps = new ProcessStartInfo("https://support.microsoft.com/ko-kr/topic/%EC%9D%8C%EC%84%B1%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%96%B8%EC%96%B4-%ED%8C%A9-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-24d06ef3-ca09-ddcc-70a0-63606fd16394")
+                    var ps = new ProcessStartInfo("https://github.com/sappho192/PartyYomi/wiki/%EC%9C%88%EB%8F%84%EC%9A%B0-TTS-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0")
                     {
                         UseShellExecute = true,
                         Verb = "open"
@@ -82,15 +91,8 @@ namespace PartyYomi.ViewModels.Windows
         {
             new NavigationViewItem()
             {
-                Content = "PartyYomi",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
                 TargetPageType = typeof(Views.Pages.DashboardPage)
-            },
-            new NavigationViewItem()
-            {
-                Content = "Data",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
-                TargetPageType = typeof(Views.Pages.DataPage)
             }
         };
 
@@ -99,7 +101,7 @@ namespace PartyYomi.ViewModels.Windows
         {
             new NavigationViewItem()
             {
-                Content = "Settings",
+                Content = "설정",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
                 TargetPageType = typeof(Views.Pages.SettingsPage)
             }
