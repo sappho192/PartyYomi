@@ -46,26 +46,34 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <ui:Card Grid.Column="0" VerticalAlignment="Top" Margin="16">
-                <StackPanel Orientation="Vertical">
-                    <ui:TextBlock FontTypography="BodyStrong" Text="확인하는 채널"/>
-                    <Border Height="16"/>
-                    <!--<ui:ListView/>-->
-                    <ui:TextBlock FontTypography="Caption" Text="・　파티"/>
-                    <ui:TextBlock FontTypography="Caption" Text="・　연합 파티"/>
-                    <ui:TextBlock FontTypography="Caption"  Text="・　서버초월 링크셸"/>
-                </StackPanel>
-            </ui:Card>
-            <ui:Card Grid.Column="1" VerticalAlignment="Top" Margin="16">
-                <StackPanel Orientation="Vertical">
-                    <ui:TextBlock FontTypography="BodyStrong" Text="TTS 설정 현황"/>
-                    <Border Height="16"/>
-                    <!--<ui:ListView/>-->
-                    <ui:TextBlock FontTypography="Caption" Text="・　TTS 엔진: Microsoft Haruka Desktop"/>
-                    <ui:TextBlock FontTypography="Caption" Text="・　연합 파티"/>
-                    <ui:TextBlock FontTypography="Caption"  Text="・　서버초월 링크셸"/>
-                </StackPanel>
-            </ui:Card>
+            <Grid Grid.Column="0">
+                <ui:Card VerticalAlignment="Top" Margin="16">
+                    <StackPanel Orientation="Vertical">
+                        <ui:TextBlock FontTypography="BodyStrong" Text="확인하는 채널"/>
+                        <Border Height="16"/>
+                        <!--<ui:ListView/>-->
+                        <ui:TextBlock FontTypography="Caption" Text="・　파티"/>
+                        <ui:TextBlock FontTypography="Caption" Text="・　연합 파티"/>
+                        <ui:TextBlock FontTypography="Caption"  Text="・　서버초월 링크셸"/>
+                    </StackPanel>
+                </ui:Card>
+            </Grid>
+            <Grid Grid.Column="1">
+                <ui:Card Grid.Row="0" VerticalAlignment="Stretch" VerticalContentAlignment="Top" Margin="16">
+                    <StackPanel Orientation="Vertical">
+                        <ui:TextBlock FontTypography="BodyStrong" Text="아래 플레이어들의 채팅은 읽지 않음"/>
+                        <Border Height="16"/>
+                        <ui:ListView ItemsSource="{Binding ViewModel.PlayerInfos}"
+                                     IsEnabled="False">
+                            <ui:ListView.ItemTemplate>
+                                <DataTemplate DataType="={x:Type models:PlayerInfo}">
+                                    <ui:TextBlock FontTypography="Caption" Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </ui:ListView.ItemTemplate>
+                        </ui:ListView>
+                    </StackPanel>
+                </ui:Card>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

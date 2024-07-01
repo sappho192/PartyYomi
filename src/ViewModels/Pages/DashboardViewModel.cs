@@ -14,6 +14,8 @@ namespace PartyYomi.ViewModels.Pages
         private string _speechToggleDescription = "게임 내 채팅을 읽을 준비가 되어있습니다.";
         [ObservableProperty]
         private string _speechIcon = "DesktopSpeaker20";
+        [ObservableProperty]
+        private List<PlayerInfo> _playerInfos = PartyYomiSettings.Instance.ChatSettings.PlayerInfos;
 
         public DashboardViewModel()
         {
