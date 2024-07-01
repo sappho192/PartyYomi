@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="SettingsPage"
+    Style="{StaticResource PageAll}"
     d:DataContext="{d:DesignInstance local:SettingsPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
@@ -19,12 +20,12 @@
     <Page.Resources>
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
     </Page.Resources>
-    <TabControl Margin="16">
+    <TabControl Margin="0,48,0,16">
         <TabItem Name="Appearance">
             <TabItem.Header>
                 <ui:TextBlock Text="일반"/>
             </TabItem.Header>
-            <StackPanel>
+            <StackPanel Margin="4,16,4,0">
                 <ui:TextBlock FontTypography="Subtitle" Text="Personalization" />
                 <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="테마" />
                 <RadioButton
@@ -44,7 +45,7 @@
             <TabItem.Header>
                 <ui:TextBlock Text="게임 내 정보"/>
             </TabItem.Header>
-            <StackPanel>
+            <StackPanel Margin="4,16,4,0">
                 <TextBlock FontSize="20" FontWeight="Medium" Text="채팅" />
                 <TextBlock Margin="0,12,0,0" Text="다음 목록에 있는 플레이어의 채팅은 읽지 않습니다." />
                 <DataGrid Name="dgPlayerInfos" CanUserAddRows="False"
@@ -55,7 +56,7 @@
             <TabItem.Header>
                 <ui:TextBlock Text="TTS"/>
             </TabItem.Header>
-            <StackPanel>
+            <StackPanel Margin="4,16,4,0">
                 <ui:TextBlock FontTypography="Subtitle" FontWeight="Medium" Text="채팅 언어별 설정" />
                 <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="일본어" />
                 <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="한국어" />
