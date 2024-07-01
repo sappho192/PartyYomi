@@ -23,8 +23,8 @@ namespace PartyYomi.ViewModels.Pages
         private INotifyCollectionChangedSynchronizedView<string> _playerInfos =
             PartyYomiSettings.Instance.ChatSettings.PlayerInfos.CreateView(player => player.Name).ToNotifyCollectionChanged();
         [ObservableProperty]
-        private INotifyCollectionChangedSynchronizedView<ChatChannel> _enabledChatChannels;
-        // ChatChannel can be acquired from PartyYomiSettings.Instance.ChatSettings.ChatChannels
+        private INotifyCollectionChangedSynchronizedView<string> _enabledChatChannels =
+            PartyYomiSettings.Instance.ChatSettings.EnabledChatChannels.CreateView(ch => ch.Name).ToNotifyCollectionChanged();
 
         private readonly INavigationService _navigationService;
 
@@ -41,19 +41,6 @@ namespace PartyYomi.ViewModels.Pages
                 _isSpeechActive = false;
             }
             OnSpeechToggle();
-
-            InitializeEnabledChatChannels();
-        }
-
-        private void InitializeEnabledChatChannels()
-        {
-            // Assuming ChatChannel has an IsEnabled property of type bool
-            var enabledChannels = PartyYomiSettings.Instance.ChatSettings.ChatChannels
-               .Where(channel => channel.IsEnabled);
-            var newEnabledChatChannels = new ObservableList<ChatChannel>();
-            newEnabledChatChannels.AddRange(enabledChannels);
-
-            EnabledChatChannels = newEnabledChatChannels.CreateView(channel => channel).ToNotifyCollectionChanged();
         }
 
         [RelayCommand]

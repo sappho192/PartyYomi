@@ -59,7 +59,7 @@
                             </StackPanel>
                         </DockPanel>
                         <!--<Border Height="16"/>-->
-                        <!--<ui:ListView ItemsSource="{Binding ViewModel.EnabledChatChannels}" IsEnabled="False"/>-->
+                        <ui:ListView ItemsSource="{Binding ViewModel.EnabledChatChannels}" IsEnabled="False"/>
                     </StackPanel>
                 </ui:Card>
             </Grid>

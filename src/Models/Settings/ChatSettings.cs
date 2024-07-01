@@ -1,5 +1,6 @@
 ﻿using ObservableCollections;
 using PartyYomi.Helpers;
+using YamlDotNet.Serialization;
 
 namespace PartyYomi.Models.Settings
 {
@@ -32,6 +33,21 @@ namespace PartyYomi.Models.Settings
             }
         }
         private ObservableList<ChatChannel>? chatChannel;
+
+        [YamlIgnore]
+        public ObservableList<ChatChannel>? EnabledChatChannels
+        {
+            get => enabledChatChannels;
+            set
+            {
+                if (value != enabledChatChannels)
+                {
+                    enabledChatChannels = value;
+                    OnSettingsChanged?.Invoke(this, nameof(EnabledChatChannels), enabledChatChannels);
+                }
+            }
+        }
+        private ObservableList<ChatChannel>? enabledChatChannels = [];
 
         public event SettingsChangedEventHandler OnSettingsChanged;
     }

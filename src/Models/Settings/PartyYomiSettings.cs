@@ -31,6 +31,7 @@ namespace PartyYomi.Models.Settings
                         new ChatChannel { Name = "Alliance", ChatCode = (int)ChatCode.Alliance, IsEnabled = true },
                         new ChatChannel { Name = "Say", ChatCode = (int)ChatCode.Say, IsEnabled = false },
                         new ChatChannel { Name = "Shout", ChatCode = (int)ChatCode.Shout, IsEnabled = false },
+                        new ChatChannel { Name = "Yell", ChatCode = (int)ChatCode.Yell, IsEnabled = false },
                         new ChatChannel { Name = "LinkShell1", ChatCode = (int)ChatCode.LinkShell1, IsEnabled = false },
                         new ChatChannel { Name = "LinkShell2", ChatCode = (int)ChatCode.LinkShell2, IsEnabled = false },
                         new ChatChannel { Name = "LinkShell3", ChatCode = (int)ChatCode.LinkShell3, IsEnabled = false },
@@ -48,7 +49,8 @@ namespace PartyYomi.Models.Settings
                         new ChatChannel { Name = "CWLinkShell7", ChatCode = (int)ChatCode.CWLinkShell7, IsEnabled = false },
                         new ChatChannel { Name = "CWLinkShell8", ChatCode = (int)ChatCode.CWLinkShell8, IsEnabled = false },
                         new ChatChannel { Name = "FreeCompany", ChatCode = (int)ChatCode.FreeCompany,  IsEnabled = false },
-                        ]
+                        ],
+                    EnabledChatChannels = []
                 },
                 UiSettings = new UISettings
                 {
@@ -65,8 +67,18 @@ namespace PartyYomi.Models.Settings
 
         private void onSettingsChanged(string group, object sender, string name, object value, bool showValue = true)
         {
-            string template = showValue ? " settings {@propertyName} changed to {@value}"
-                    : " settings {@propertyName} changed";
+            //string template = showValue ? " settings {@propertyName} changed to {@value}"
+            //        : " settings {@propertyName} changed";
+            if (group.Equals("ChatChannel") && name.Equals("IsEnabled")) {
+                if ((bool)value)
+                {
+                    ChatSettings?.EnabledChatChannels.Add((ChatChannel)sender);
+                }
+                else
+                {
+                    ChatSettings?.EnabledChatChannels.Remove((ChatChannel)sender);
+                }
+            }
 
             UpdateSettingsFile(this);
         }
@@ -85,7 +97,51 @@ namespace PartyYomi.Models.Settings
             settings.ChatSettings.OnSettingsChanged += (sender, name, value) => { settings.onSettingsChanged("Chat", sender, name, value); };
             settings.ChatSettings.PlayerInfos.ForEach(playerInfo => playerInfo.OnSettingsChanged += (sender, name, value) => { settings.onSettingsChanged("PlayerInfo", sender, name, value); });
             settings.ChatSettings.PlayerInfos.CollectionChanged += PlayerInfos_CollectionChanged;
-            settings.ChatSettings.ChatChannels.ForEach(chatChannel => chatChannel.OnSettingsChanged += (sender, name, value) => { settings.onSettingsChanged("ChatChannel", sender, name, value); });
+            settings.ChatSettings.ChatChannels.ForEach(chatChannel => chatChannel.OnSettingsChanged += (sender, name, value) => { 
+                settings.onSettingsChanged("ChatChannel", sender, name, value); 
+            });
+
+            foreach (var item in settings.ChatSettings.ChatChannels)
+            {
+                if (item.IsEnabled)
+                {
+                    settings.ChatSettings.EnabledChatChannels.Add(item);
+                }
+            }
+            settings.ChatSettings.EnabledChatChannels.CollectionChanged += EnabledChatChannels_CollectionChanged;
+        }
+
+        private static void EnabledChatChannels_CollectionChanged(in NotifyCollectionChangedEventArgs<ChatChannel> e)
+        {
+            switch (e.Action)
+            {
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                    if (e.IsSingleItem)
+                    {
+                        e.NewItem.OnSettingsChanged += (sender, name, value) => { Instance?.onSettingsChanged("PlayerInfo", sender, name, value); };
+                    }
+                    else
+                    {
+                        foreach (var item in e.NewItems)
+                        {
+                            item.OnSettingsChanged += (sender, name, value) => { Instance?.onSettingsChanged("PlayerInfo", sender, name, value); };
+                        }
+                    }
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                    if (e.IsSingleItem)
+                    {
+                        e.OldItem.OnSettingsChanged -= (sender, name, value) => { Instance?.onSettingsChanged("PlayerInfo", sender, name, value); };
+                    }
+                    else
+                    {
+                        foreach (var item in e.OldItems)
+                        {
+                            item.OnSettingsChanged -= (sender, name, value) => { Instance?.onSettingsChanged("PlayerInfo", sender, name, value); };
+                        }
+                    }
+                    break;
+            }
         }
 
         private static void PlayerInfos_CollectionChanged(in ObservableCollections.NotifyCollectionChangedEventArgs<PlayerInfo> e)

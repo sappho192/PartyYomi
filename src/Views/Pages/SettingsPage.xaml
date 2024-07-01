@@ -33,88 +33,97 @@
             <TabItem.Header>
                 <ui:TextBlock Text="일반" FontWeight="Bold" FontTypography="Caption"/>
             </TabItem.Header>
-            <StackPanel Margin="4,16,4,0">
-                <ui:TextBlock FontTypography="Subtitle" Margin="0,12,0,0" Text="테마" />
-                <RadioButton
+            <ui:Card VerticalAlignment="Stretch" VerticalContentAlignment="Top">
+                <StackPanel Margin="4,16,4,0">
+                    <ui:TextBlock FontTypography="Subtitle" Text="테마" />
+                    <Border Height="8"/>
+                    <RadioButton
                     Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
-                    Margin="0,12,0,0" CommandParameter="theme_light" Content="밝게" GroupName="themeSelect"
+                    CommandParameter="theme_light" Content="밝게" GroupName="themeSelect"
                     IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}" />
-                <RadioButton
+                    <RadioButton
                     Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
                     Margin="0,8,0,0" CommandParameter="theme_dark" Content="어둡게" GroupName="themeSelect"
                     IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
-                <ui:TextBlock Margin="0,24,0,0" FontTypography="Subtitle"
+                    <ui:TextBlock Margin="0,24,0,0" FontTypography="Subtitle"
                     Text="PartyYomi 정보" />
-                <ui:TextBlock Margin="0,12,0,0" FontTypography="Body" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
-            </StackPanel>
+                    <ui:TextBlock Margin="0,12,0,0" FontTypography="Body" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
+                </StackPanel>
+            </ui:Card>
         </TabItem>
         <TabItem Name="Game">
             <TabItem.Header>
                 <ui:TextBlock FontWeight="Bold" FontTypography="Caption" Text="게임 내 정보"/>
             </TabItem.Header>
-            <StackPanel Margin="4,16,4,0">
-                <ui:TextBlock FontTypography="Subtitle" Text="채팅" />
-                <ui:CardExpander>
-                    <ui:CardExpander.Header>
-                        <ui:TextBlock Margin="0,12,0,0" FontTypography="BodyStrong" Text="채팅을 읽지 않을 플레이어 목록 (클릭하여 편집)" />
-                    </ui:CardExpander.Header>
-                    <ui:CardExpander.Content>
-                        <StackPanel Orientation="Vertical">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="AUTO"/>
-                                    <RowDefinition Height="AUTO"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Command="{Binding ViewModel.AddPlayerInfoCommand, IsAsync=True}" 
-                                        CommandParameter="{StaticResource DialogContent}"
-                                        Content="추가"/>
-                                    <Border Width="8"/>
-                                    <Button Command="{Binding ViewModel.RemovePlayerInfoCommand}" Content="제거"/>
-                                </StackPanel>
-                                <ui:ListView Grid.Row="1" Margin="0,8,0,0" ItemsSource="{Binding ViewModel.PlayerInfos, Mode=TwoWay}"
-                                    SelectionChanged="ListView_SelectionChanged"/>
-                            </Grid>
-                        </StackPanel>
-                    </ui:CardExpander.Content>
-                </ui:CardExpander>
-                <ui:CardExpander>
-                    <ui:CardExpander.Header>
-                        <ui:TextBlock Margin="0,12,0,0" FontTypography="BodyStrong" Text="TTS로 읽을 채널 목록 (클릭하여 편집)" />
-                    </ui:CardExpander.Header>
-                    <ui:CardExpander.Content>
-                        <StackPanel Orientation="Vertical">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="AUTO"/>
-                                    <RowDefinition Height="AUTO"/>
-                                </Grid.RowDefinitions>
-                                <ui:ListView SelectionMode="Multiple" Grid.Row="1" Margin="0,8,0,0" ItemsSource="{Binding ViewModel.EnabledChatCodes, Mode=TwoWay}">
-                                    <ui:ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <ui:TextBlock Text="{Binding Name}" FontTypography="BodyStrong"/>
-                                                <Border Width="8"/>
-                                                <CheckBox IsChecked="{Binding IsEnabled}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ui:ListView.ItemTemplate>
-                                </ui:ListView>
-                            </Grid>
-                        </StackPanel>
-                    </ui:CardExpander.Content>
-                </ui:CardExpander>
-            </StackPanel>
+            <ui:Card VerticalAlignment="Stretch" VerticalContentAlignment="Top">
+                <StackPanel Margin="4,16,4,0">
+                    <ui:TextBlock FontTypography="Subtitle" Text="채팅" />
+                    <Border Height="8"/>
+                    <ui:CardExpander>
+                        <ui:CardExpander.Header>
+                            <ui:TextBlock Margin="0,12,0,0" FontTypography="BodyStrong" Text="채팅을 읽지 않을 플레이어 목록 (클릭하여 편집)" />
+                        </ui:CardExpander.Header>
+                        <ui:CardExpander.Content>
+                            <StackPanel Orientation="Vertical">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="AUTO"/>
+                                        <RowDefinition Height="AUTO"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Command="{Binding ViewModel.AddPlayerInfoCommand, IsAsync=True}" 
+                            CommandParameter="{StaticResource DialogContent}"
+                            Content="추가"/>
+                                        <Border Width="8"/>
+                                        <Button Command="{Binding ViewModel.RemovePlayerInfoCommand}" Content="제거"/>
+                                    </StackPanel>
+                                    <ui:ListView Grid.Row="1" Margin="0,8,0,0" ItemsSource="{Binding ViewModel.PlayerInfos, Mode=TwoWay}"
+                        SelectionChanged="ListView_SelectionChanged"/>
+                                </Grid>
+                            </StackPanel>
+                        </ui:CardExpander.Content>
+                    </ui:CardExpander>
+                    <ui:CardExpander>
+                        <ui:CardExpander.Header>
+                            <ui:TextBlock Margin="0,12,0,0" FontTypography="BodyStrong" Text="TTS로 읽을 채널 목록 (클릭하여 편집)" />
+                        </ui:CardExpander.Header>
+                        <ui:CardExpander.Content>
+                            <StackPanel Orientation="Vertical">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="AUTO"/>
+                                        <RowDefinition Height="AUTO"/>
+                                    </Grid.RowDefinitions>
+                                    <ui:ListView SelectionMode="Single" Grid.Row="1" Margin="0,8,0,0" ItemsSource="{Binding ViewModel.EnabledChatCodes, Mode=TwoWay}">
+                                        <ui:ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <ui:TextBlock Text="{Binding Name}" FontTypography="BodyStrong"/>
+                                                    <Border Width="16"/>
+                                                    <CheckBox IsChecked="{Binding IsEnabled}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ui:ListView.ItemTemplate>
+                                    </ui:ListView>
+                                </Grid>
+                            </StackPanel>
+                        </ui:CardExpander.Content>
+                    </ui:CardExpander>
+                </StackPanel>
+            </ui:Card>
         </TabItem>
         <TabItem Name="TTS">
             <TabItem.Header>
                 <ui:TextBlock Text="TTS" FontWeight="Bold" FontTypography="Caption"/>
             </TabItem.Header>
-            <StackPanel Margin="4,16,4,0">
-                <ui:TextBlock FontTypography="Subtitle" Text="채팅 언어별 설정" />
-                <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="일본어" />
-                <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="한국어" />
-            </StackPanel>
+            <ui:Card VerticalAlignment="Stretch" VerticalContentAlignment="Top">
+                <StackPanel Margin="4,16,4,0">
+                    <ui:TextBlock FontTypography="Subtitle" Text="채팅 언어별 설정" />
+                    <Border Height="8"/>
+                    <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="일본어" />
+                    <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="한국어" />
+                </StackPanel>
+            </ui:Card>
         </TabItem>
     </TabControl>
 </Page>
