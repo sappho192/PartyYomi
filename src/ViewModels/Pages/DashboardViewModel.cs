@@ -1,4 +1,7 @@
 ﻿using PartyYomi.Models.Settings;
+using PartyYomi.Services;
+using PartyYomi.Views.Windows;
+using Wpf.Ui;
 
 namespace PartyYomi.ViewModels.Pages
 {
@@ -17,8 +20,12 @@ namespace PartyYomi.ViewModels.Pages
         [ObservableProperty]
         private List<PlayerInfo> _playerInfos = PartyYomiSettings.Instance.ChatSettings.PlayerInfos;
 
-        public DashboardViewModel()
+        private readonly INavigationService _navigationService;
+
+        public DashboardViewModel(INavigationService navigationService)
         {
+            _navigationService = navigationService;
+
             if (PartyYomiSettings.Instance.UiSettings.IsTtsEnabled)
             {
                 _isSpeechActive = true;
@@ -48,6 +55,12 @@ namespace PartyYomi.ViewModels.Pages
                 SpeechIcon = "DesktopSpeakerOff20";
                 PartyYomiSettings.Instance.UiSettings.IsTtsEnabled = false;
             }
+        }
+
+        [RelayCommand]
+        private void OnNavigateToSettingsPage()
+        {
+            _ = _navigationService.Navigate(typeof(Views.Pages.SettingsPage));
         }
     }
 }

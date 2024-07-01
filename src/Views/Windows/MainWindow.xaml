@@ -42,7 +42,10 @@
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}"
             PaneDisplayMode="LeftFluent">
             <ui:NavigationView.Header>
-                <ui:BreadcrumbBar x:Name="BreadcrumbBar" Margin="42,32,42,20" />
+                <StackPanel Orientation="Vertical">
+                    <ui:BreadcrumbBar x:Name="BreadcrumbBar" Margin="42,32,42,20" Visibility="Collapsed" />
+                    <Border Height="48"/>
+                </StackPanel>
             </ui:NavigationView.Header>
             <ui:NavigationView.ContentOverlay>
                 <Grid>
