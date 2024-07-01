@@ -20,7 +20,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid Margin="0,48,0,0" Grid.Row="0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
@@ -73,14 +73,7 @@
                             <ui:TextBlock FontTypography="BodyStrong" Text="아래 플레이어들의 채팅은 읽지 않음"/>
                         </DockPanel>
                         <Border Height="16"/>
-                        <ui:ListView ItemsSource="{Binding ViewModel.PlayerInfos}"
-                                     IsEnabled="False">
-                            <ui:ListView.ItemTemplate>
-                                <DataTemplate DataType="={x:Type models:PlayerInfo}">
-                                    <ui:TextBlock FontTypography="Caption" Text="{Binding Name}"/>
-                                </DataTemplate>
-                            </ui:ListView.ItemTemplate>
-                        </ui:ListView>
+                        <ui:ListView ItemsSource="{Binding ViewModel.PlayerInfos}" IsEnabled="False"/>
                     </StackPanel>
                 </ui:Card>
             </Grid>

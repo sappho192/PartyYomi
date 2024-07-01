@@ -43,8 +43,12 @@ namespace PartyYomi.ViewModels.Windows
 
                 var author = decodedChat.Line.RemoveAfter(":");
                 var sentence = decodedChat.Line.RemoveBefore(":");
-                if (PartyYomiSettings.Instance.ChatSettings.PlayerInfos.Find(player => player.Name == author) != null) {
-                    return;
+                foreach (var player in PartyYomiSettings.Instance.ChatSettings.PlayerInfos)
+                {
+                    if (player.Name == author)
+                    {
+                        return;
+                    }
                 }
 
                 //Application.Current.Dispatcher.Invoke(() =>

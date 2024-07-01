@@ -1,4 +1,5 @@
-﻿using PartyYomi.Models.Settings;
+﻿using ObservableCollections;
+using PartyYomi.Models.Settings;
 using PartyYomi.Services;
 using PartyYomi.Views.Windows;
 using Wpf.Ui;
@@ -18,7 +19,8 @@ namespace PartyYomi.ViewModels.Pages
         [ObservableProperty]
         private string _speechIcon = "DesktopSpeaker20";
         [ObservableProperty]
-        private List<PlayerInfo> _playerInfos = PartyYomiSettings.Instance.ChatSettings.PlayerInfos;
+        private INotifyCollectionChangedSynchronizedView<string> _playerInfos =
+            PartyYomiSettings.Instance.ChatSettings.PlayerInfos.CreateView(player => player.Name).ToNotifyCollectionChanged();
 
         private readonly INavigationService _navigationService;
 
