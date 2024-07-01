@@ -78,6 +78,32 @@
                         </StackPanel>
                     </ui:CardExpander.Content>
                 </ui:CardExpander>
+                <ui:CardExpander>
+                    <ui:CardExpander.Header>
+                        <ui:TextBlock Margin="0,12,0,0" FontTypography="BodyStrong" Text="TTS로 읽을 채널 목록 (클릭하여 편집)" />
+                    </ui:CardExpander.Header>
+                    <ui:CardExpander.Content>
+                        <StackPanel Orientation="Vertical">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="AUTO"/>
+                                    <RowDefinition Height="AUTO"/>
+                                </Grid.RowDefinitions>
+                                <ui:ListView SelectionMode="Multiple" Grid.Row="1" Margin="0,8,0,0" ItemsSource="{Binding ViewModel.EnabledChatCodes, Mode=TwoWay}">
+                                    <ui:ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <ui:TextBlock Text="{Binding Name}" FontTypography="BodyStrong"/>
+                                                <Border Width="8"/>
+                                                <CheckBox IsChecked="{Binding IsEnabled}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ui:ListView.ItemTemplate>
+                                </ui:ListView>
+                            </Grid>
+                        </StackPanel>
+                    </ui:CardExpander.Content>
+                </ui:CardExpander>
             </StackPanel>
         </TabItem>
         <TabItem Name="TTS">

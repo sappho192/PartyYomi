@@ -19,6 +19,20 @@ namespace PartyYomi.Models.Settings
         }
         private ObservableList<PlayerInfo>? playerNames;
 
+        public ObservableList<ChatChannel>? ChatChannels
+        {
+            get => chatChannel;
+            set
+            {
+                if (value != chatChannel)
+                {
+                    chatChannel = value;
+                    OnSettingsChanged?.Invoke(this, nameof(ChatChannels), chatChannel);
+                }
+            }
+        }
+        private ObservableList<ChatChannel>? chatChannel;
+
         public event SettingsChangedEventHandler OnSettingsChanged;
     }
 }

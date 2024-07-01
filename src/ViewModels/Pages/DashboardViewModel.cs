@@ -1,4 +1,5 @@
 ﻿using ObservableCollections;
+using PartyYomi.FFXIV;
 using PartyYomi.Models.Settings;
 using PartyYomi.Services;
 using PartyYomi.Views.Windows;
@@ -21,6 +22,9 @@ namespace PartyYomi.ViewModels.Pages
         [ObservableProperty]
         private INotifyCollectionChangedSynchronizedView<string> _playerInfos =
             PartyYomiSettings.Instance.ChatSettings.PlayerInfos.CreateView(player => player.Name).ToNotifyCollectionChanged();
+        [ObservableProperty]
+        private INotifyCollectionChangedSynchronizedView<ChatChannel> _enabledChatChannels;
+        // ChatChannel can be acquired from PartyYomiSettings.Instance.ChatSettings.ChatChannels
 
         private readonly INavigationService _navigationService;
 
@@ -37,6 +41,19 @@ namespace PartyYomi.ViewModels.Pages
                 _isSpeechActive = false;
             }
             OnSpeechToggle();
+
+            InitializeEnabledChatChannels();
+        }
+
+        private void InitializeEnabledChatChannels()
+        {
+            // Assuming ChatChannel has an IsEnabled property of type bool
+            var enabledChannels = PartyYomiSettings.Instance.ChatSettings.ChatChannels
+               .Where(channel => channel.IsEnabled);
+            var newEnabledChatChannels = new ObservableList<ChatChannel>();
+            newEnabledChatChannels.AddRange(enabledChannels);
+
+            EnabledChatChannels = newEnabledChatChannels.CreateView(channel => channel).ToNotifyCollectionChanged();
         }
 
         [RelayCommand]

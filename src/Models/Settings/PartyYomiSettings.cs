@@ -3,6 +3,8 @@ using YamlDotNet.Serialization;
 using System.IO;
 using NLog.Fluent;
 using Newtonsoft.Json;
+using PartyYomi.FFXIV;
+using ObservableCollections;
 
 namespace PartyYomi.Models.Settings
 {
@@ -23,6 +25,29 @@ namespace PartyYomi.Models.Settings
                 {
                     PlayerInfos = [
                         new PlayerInfo { Name = "Forename Surname" },
+                        ],
+                    ChatChannels = [
+                        new ChatChannel { Name = "Party", ChatCode = (int)ChatCode.Party, IsEnabled = true },
+                        new ChatChannel { Name = "Alliance", ChatCode = (int)ChatCode.Alliance, IsEnabled = true },
+                        new ChatChannel { Name = "Say", ChatCode = (int)ChatCode.Say, IsEnabled = false },
+                        new ChatChannel { Name = "Shout", ChatCode = (int)ChatCode.Shout, IsEnabled = false },
+                        new ChatChannel { Name = "LinkShell1", ChatCode = (int)ChatCode.LinkShell1, IsEnabled = false },
+                        new ChatChannel { Name = "LinkShell2", ChatCode = (int)ChatCode.LinkShell2, IsEnabled = false },
+                        new ChatChannel { Name = "LinkShell3", ChatCode = (int)ChatCode.LinkShell3, IsEnabled = false },
+                        new ChatChannel { Name = "LinkShell4", ChatCode = (int)ChatCode.LinkShell4, IsEnabled = false },
+                        new ChatChannel { Name = "LinkShell5", ChatCode = (int)ChatCode.LinkShell5, IsEnabled = false },
+                        new ChatChannel { Name = "LinkShell6", ChatCode = (int)ChatCode.LinkShell6, IsEnabled = false },
+                        new ChatChannel { Name = "LinkShell7", ChatCode = (int)ChatCode.LinkShell7, IsEnabled = false },
+                        new ChatChannel { Name = "LinkShell8", ChatCode = (int)ChatCode.LinkShell8, IsEnabled = false },
+                        new ChatChannel { Name = "CWLinkShell1", ChatCode = (int)ChatCode.CWLinkShell1, IsEnabled = false },
+                        new ChatChannel { Name = "CWLinkShell2", ChatCode = (int)ChatCode.CWLinkShell2, IsEnabled = false },
+                        new ChatChannel { Name = "CWLinkShell3", ChatCode = (int)ChatCode.CWLinkShell3, IsEnabled = false },
+                        new ChatChannel { Name = "CWLinkShell4", ChatCode = (int)ChatCode.CWLinkShell4, IsEnabled = false },
+                        new ChatChannel { Name = "CWLinkShell5", ChatCode = (int)ChatCode.CWLinkShell5, IsEnabled = false },
+                        new ChatChannel { Name = "CWLinkShell6", ChatCode = (int)ChatCode.CWLinkShell6, IsEnabled = false },
+                        new ChatChannel { Name = "CWLinkShell7", ChatCode = (int)ChatCode.CWLinkShell7, IsEnabled = false },
+                        new ChatChannel { Name = "CWLinkShell8", ChatCode = (int)ChatCode.CWLinkShell8, IsEnabled = false },
+                        new ChatChannel { Name = "FreeCompany", ChatCode = (int)ChatCode.FreeCompany,  IsEnabled = false },
                         ]
                 },
                 UiSettings = new UISettings
@@ -60,6 +85,7 @@ namespace PartyYomi.Models.Settings
             settings.ChatSettings.OnSettingsChanged += (sender, name, value) => { settings.onSettingsChanged("Chat", sender, name, value); };
             settings.ChatSettings.PlayerInfos.ForEach(playerInfo => playerInfo.OnSettingsChanged += (sender, name, value) => { settings.onSettingsChanged("PlayerInfo", sender, name, value); });
             settings.ChatSettings.PlayerInfos.CollectionChanged += PlayerInfos_CollectionChanged;
+            settings.ChatSettings.ChatChannels.ForEach(chatChannel => chatChannel.OnSettingsChanged += (sender, name, value) => { settings.onSettingsChanged("ChatChannel", sender, name, value); });
         }
 
         private static void PlayerInfos_CollectionChanged(in ObservableCollections.NotifyCollectionChangedEventArgs<PlayerInfo> e)

@@ -53,13 +53,13 @@
                             <ui:Button DockPanel.Dock="Right" Command="{Binding ViewModel.NavigateToSettingsPageCommand}">
                                 <ui:SymbolIcon Symbol="Settings16" FontSize="16"/>
                             </ui:Button>
-                            <ui:TextBlock FontTypography="BodyStrong" Text="확인하는 채널"/>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:TextBlock FontTypography="BodyStrong" Text="확인하는 채널: "/>
+                                <!--<ui:TextBlock FontTypography="BodyStrong" Text="{Binding ViewModel.EnabledChatChannelCount}"/>-->
+                            </StackPanel>
                         </DockPanel>
-                        <Border Height="16"/>
-                        <!--<ui:ListView/>-->
-                        <ui:TextBlock FontTypography="Caption" Text="・　파티"/>
-                        <ui:TextBlock FontTypography="Caption" Text="・　연합 파티"/>
-                        <ui:TextBlock FontTypography="Caption"  Text="・　서버초월 링크셸"/>
+                        <!--<Border Height="16"/>-->
+                        <!--<ui:ListView ItemsSource="{Binding ViewModel.EnabledChatChannels}" IsEnabled="False"/>-->
                     </StackPanel>
                 </ui:Card>
             </Grid>

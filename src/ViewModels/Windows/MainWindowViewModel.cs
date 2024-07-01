@@ -35,8 +35,7 @@ namespace PartyYomi.ViewModels.Windows
                 return;
             }
             int.TryParse(chat.Code, System.Globalization.NumberStyles.HexNumber, null, out var intCode);
-            var code = (ChatCode)intCode;
-            if (code == ChatCode.Party || code == ChatCode.Say)
+            if (PartyYomiSettings.Instance.ChatSettings.ChatChannels.Where(ch => ch.IsEnabled).Select(ch => ch.ChatCode == intCode).Any())
             {
                 string line = chat.Line;
                 ChatLogItem decodedChat = chat.Bytes.DecodeAutoTranslate();

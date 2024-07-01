@@ -1,4 +1,5 @@
 ﻿using ObservableCollections;
+using PartyYomi.FFXIV;
 using PartyYomi.Models.Settings;
 using System.Threading;
 using System.Windows.Controls;
@@ -15,7 +16,7 @@ namespace PartyYomi.ViewModels.Pages
         private bool _isInitialized = false;
 
         [ObservableProperty]
-        private string _appVersion = String.Empty;
+        private string _appVersion = string.Empty;
 
         [ObservableProperty]
         private ApplicationTheme _currentTheme = ApplicationTheme.Unknown;
@@ -23,6 +24,9 @@ namespace PartyYomi.ViewModels.Pages
         [ObservableProperty]
         private INotifyCollectionChangedSynchronizedView<string> _playerInfos =
             PartyYomiSettings.Instance.ChatSettings.PlayerInfos.CreateView(player => player.Name).ToNotifyCollectionChanged();
+        [ObservableProperty]
+        private INotifyCollectionChangedSynchronizedView<ChatChannel> _enabledChatCodes =
+            PartyYomiSettings.Instance.ChatSettings.ChatChannels.CreateView(chatCode => chatCode).ToNotifyCollectionChanged();
 
         [ObservableProperty]
         private int _selectedPlayerIndex = -1;
