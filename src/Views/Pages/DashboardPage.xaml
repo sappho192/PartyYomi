@@ -18,22 +18,54 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2.5*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1.3*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <ui:SymbolIcon
+        <Grid Grid.Row="0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <ui:SymbolIcon
+                    Grid.Column="0"
                     Symbol="{Binding ViewModel.SpeechIcon}"
-                    FontSize="68"/>
-                <ToggleButton HorizontalAlignment="Center" VerticalAlignment="Center"
+                    FontSize="80"/>
+            <StackPanel Grid.Column="1"
+                VerticalAlignment="Center" HorizontalAlignment="Left">
+                <ui:ToggleSwitch 
                     IsChecked="{Binding ViewModel.IsSpeechActive, Mode=TwoWay}"
-                    Command="{Binding ViewModel.SpeechToggleCommand, Mode=OneWay}"
-                    Width="200" Height="100">
-                    <ui:TextBlock Text="{Binding ViewModel.SpeechToggleState}" />
-                </ToggleButton>
+                    Command="{Binding ViewModel.SpeechToggleCommand, Mode=OneWay}"/>
+                <Border Height="16"/>
+                <ui:TextBlock FontTypography="Subtitle" Text="{Binding ViewModel.SpeechToggleState}" />
+                <ui:TextBlock FontTypography="Caption" Text="{Binding ViewModel.SpeechToggleDescription}" />
             </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <ui:Card Grid.Column="0" VerticalAlignment="Top" Margin="16">
+                <StackPanel Orientation="Vertical">
+                    <ui:TextBlock FontTypography="BodyStrong" Text="확인하는 채널"/>
+                    <Border Height="16"/>
+                    <!--<ui:ListView/>-->
+                    <ui:TextBlock FontTypography="Caption" Text="・　파티"/>
+                    <ui:TextBlock FontTypography="Caption" Text="・　연합 파티"/>
+                    <ui:TextBlock FontTypography="Caption"  Text="・　서버초월 링크셸"/>
+                </StackPanel>
+            </ui:Card>
+            <ui:Card Grid.Column="1" VerticalAlignment="Top" Margin="16">
+                <StackPanel Orientation="Vertical">
+                    <ui:TextBlock FontTypography="BodyStrong" Text="TTS 설정 현황"/>
+                    <Border Height="16"/>
+                    <!--<ui:ListView/>-->
+                    <ui:TextBlock FontTypography="Caption" Text="・　TTS 엔진: Microsoft Haruka Desktop"/>
+                    <ui:TextBlock FontTypography="Caption" Text="・　연합 파티"/>
+                    <ui:TextBlock FontTypography="Caption"  Text="・　서버초월 링크셸"/>
+                </StackPanel>
+            </ui:Card>
         </Grid>
     </Grid>
 </Page>
