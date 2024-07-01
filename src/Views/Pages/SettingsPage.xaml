@@ -19,43 +19,47 @@
     <Page.Resources>
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
     </Page.Resources>
-
-    <StackPanel>
-        <TextBlock
-            FontSize="20"
-            FontWeight="Medium"
-            Text="Personalization" />
-        <TextBlock Margin="0,12,0,0" Text="Theme" />
-        <RadioButton
-            Margin="0,12,0,0"
-            Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
-            CommandParameter="theme_light"
-            Content="Light"
-            GroupName="themeSelect"
-            IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}" />
-        <RadioButton
-            Margin="0,8,0,0"
-            Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
-            CommandParameter="theme_dark"
-            Content="Dark"
-            GroupName="themeSelect"
-            IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
-
-        <TextBlock
-            Margin="0,24,0,0"
-            FontSize="20"
-            FontWeight="Medium"
-            Text="Game" />
-        <TextBlock Margin="0,12,0,0" Text="Player name(s)" />
-        <DataGrid Name="dgPlayerInfos"
-            CanUserAddRows="False"
-            ItemsSource="{Binding ViewModel.PlayerInfos, Mode=TwoWay}"/>
-
-        <TextBlock
-            Margin="0,24,0,0"
-            FontSize="20"
-            FontWeight="Medium"
-            Text="About PartyYomi" />
-        <TextBlock Margin="0,12,0,0" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
-    </StackPanel>
+    <TabControl Margin="16">
+        <TabItem Name="Appearance">
+            <TabItem.Header>
+                <ui:TextBlock Text="일반"/>
+            </TabItem.Header>
+            <StackPanel>
+                <ui:TextBlock FontTypography="Subtitle" Text="Personalization" />
+                <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="테마" />
+                <RadioButton
+                    Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
+                    Margin="0,12,0,0" CommandParameter="theme_light" Content="밝게" GroupName="themeSelect"
+                    IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}" />
+                <RadioButton
+                    Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
+                    Margin="0,8,0,0" CommandParameter="theme_dark" Content="어둡게" GroupName="themeSelect"
+                    IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
+                <ui:TextBlock Margin="0,24,0,0" FontTypography="Subtitle"
+                    Text="PartyYomi 정보" />
+                <TextBlock Margin="0,12,0,0" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
+            </StackPanel>
+        </TabItem>
+        <TabItem Name="Game">
+            <TabItem.Header>
+                <ui:TextBlock Text="게임 내 정보"/>
+            </TabItem.Header>
+            <StackPanel>
+                <TextBlock FontSize="20" FontWeight="Medium" Text="채팅" />
+                <TextBlock Margin="0,12,0,0" Text="다음 목록에 있는 플레이어의 채팅은 읽지 않습니다." />
+                <DataGrid Name="dgPlayerInfos" CanUserAddRows="False"
+                    ItemsSource="{Binding ViewModel.PlayerInfos, Mode=TwoWay}"/>
+            </StackPanel>
+        </TabItem>
+        <TabItem Name="TTS">
+            <TabItem.Header>
+                <ui:TextBlock Text="TTS"/>
+            </TabItem.Header>
+            <StackPanel>
+                <ui:TextBlock FontTypography="Subtitle" FontWeight="Medium" Text="채팅 언어별 설정" />
+                <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="일본어" />
+                <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="한국어" />
+            </StackPanel>
+        </TabItem>
+    </TabControl>
 </Page>
