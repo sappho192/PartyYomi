@@ -58,7 +58,7 @@ namespace PartyYomi.ViewModels.Windows
             {
                 if (System.Windows.MessageBox.Show("Microsoft Haruka Desktop 음성을 설치해주세요.") == System.Windows.MessageBoxResult.OK)
                 {
-                    var ps = new ProcessStartInfo("https://support.microsoft.com/ko-kr/topic/%EC%9D%8C%EC%84%B1%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%96%B8%EC%96%B4-%ED%8C%A9-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-24d06ef3-ca09-ddcc-70a0-63606fd16394")
+                    var ps = new ProcessStartInfo("https://github.com/sappho192/PartyYomi/wiki/%EC%9C%88%EB%8F%84%EC%9A%B0-TTS-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0")
                     {
                         UseShellExecute = true,
                         Verb = "open"
