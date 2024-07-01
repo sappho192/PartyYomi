@@ -11,6 +11,8 @@
     MinHeight="550"
     Width="850"
     Height="550"
+    MaxWidth="900"
+    MaxHeight="600"
     d:DataContext="{d:DesignInstance local:MainWindow,
                                      IsDesignTimeCreatable=True}"
     d:DesignWidth="850"
