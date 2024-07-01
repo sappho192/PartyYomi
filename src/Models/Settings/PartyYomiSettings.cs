@@ -10,7 +10,7 @@ namespace PartyYomi.Models.Settings
     {
         public static PartyYomiSettings? Instance { get; set; }
 
-        public string? SettingsVersion { get; set; }
+        public bool? StandaloneMode { get; set; }
         public ChatSettings? ChatSettings { get; set; }
         public UISettings? UiSettings { get; set; }
 
@@ -18,7 +18,7 @@ namespace PartyYomi.Models.Settings
         {
             var settings = new PartyYomiSettings
             {
-                SettingsVersion = ThisAssembly.AssemblyVersion,
+                StandaloneMode = false,
                 ChatSettings = new ChatSettings
                 {
                     PlayerInfos = [

@@ -20,8 +20,11 @@ namespace PartyYomi.ViewModels.Windows
         {
             // Initialize the view model
             InitTTS();
-            gameContext = GameContext.Instance();
-            ChatQueue.ChatLogItems.CollectionChanged += ChatLogItems_CollectionChanged;
+            if ((bool)!PartyYomiSettings.Instance.StandaloneMode)
+            {
+                gameContext = GameContext.Instance();
+                ChatQueue.ChatLogItems.CollectionChanged += ChatLogItems_CollectionChanged;
+            }
         }
 
         private void ChatLogItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
