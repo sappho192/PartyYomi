@@ -1,4 +1,5 @@
 ﻿using PartyYomi.Helpers;
+using System.Windows.Controls;
 
 namespace PartyYomi.Models.Settings
 {
@@ -19,5 +20,10 @@ namespace PartyYomi.Models.Settings
         private string name;
 
         public event SettingsChangedEventHandler OnSettingsChanged;
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

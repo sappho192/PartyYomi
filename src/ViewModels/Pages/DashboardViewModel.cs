@@ -1,8 +1,10 @@
 ﻿using ObservableCollections;
 using PartyYomi.FFXIV;
+using PartyYomi.Helpers;
 using PartyYomi.Models.Settings;
 using PartyYomi.Services;
 using PartyYomi.Views.Windows;
+using System.Reflection;
 using Wpf.Ui;
 
 namespace PartyYomi.ViewModels.Pages
@@ -43,6 +45,7 @@ namespace PartyYomi.ViewModels.Pages
             OnSpeechToggle();
         }
 
+        [TraceMethod]
         [RelayCommand]
         private void OnSpeechToggle()
         {

@@ -14,6 +14,7 @@ using Wpf.Ui;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using Serilog;
+using PartyYomi.Helpers;
 
 namespace PartyYomi
 {
@@ -96,6 +97,7 @@ namespace PartyYomi
             Log.Information($"PartyYomi {Assembly.GetExecutingAssembly().GetName().Version} started.");
         }
 
+        [TraceMethod]
         private static void LoadSettings()
         {
             var fileName = "settings.yaml";
@@ -136,6 +138,7 @@ namespace PartyYomi
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             // For more info see https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.dispatcherunhandledexception?view=windowsdesktop-6.0
+            Log.Error(e.Exception, "An unhandled exception occurred.");
         }
     }
 }

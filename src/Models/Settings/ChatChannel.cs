@@ -1,5 +1,6 @@
 ﻿using PartyYomi.FFXIV;
 using PartyYomi.Helpers;
+using System.Windows.Controls;
 
 namespace PartyYomi.Models.Settings
 {
@@ -48,5 +49,10 @@ namespace PartyYomi.Models.Settings
         private bool isEnabled;
 
         public event SettingsChangedEventHandler OnSettingsChanged;
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

@@ -3,6 +3,7 @@ using Sharlayan.Models.ReadResults;
 using Sharlayan.Models;
 using Sharlayan;
 using System.Diagnostics;
+using PartyYomi.Helpers;
 
 namespace PartyYomi.FFXIV
 {
@@ -67,6 +68,7 @@ namespace PartyYomi.FFXIV
             return false;
         }
 
+        [TraceMethod]
         private bool AttachGame()
         {
             string processName = "ffxiv_dx11";
