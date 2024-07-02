@@ -13,6 +13,8 @@ using System.Windows.Threading;
 using Wpf.Ui;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
+using Serilog;
+using PartyYomi.Helpers;
 
 namespace PartyYomi
 {
@@ -73,11 +75,29 @@ namespace PartyYomi
         /// </summary>
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            InitLogger();
             LoadSettings();
 
             _host.Start();
         }
 
+        private static void InitLogger()
+        {
+            /*
+             Enabled Log levels: Debug, Information, Warning, Error, Fatal
+             Disabled Log levels: Verbose
+             */
+
+            // Logging
+            var date = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.File($"logs/{date}.txt")
+                .CreateLogger();
+            Log.Information($"PartyYomi {Assembly.GetExecutingAssembly().GetName().Version} started.");
+        }
+
+        [TraceMethod]
         private static void LoadSettings()
         {
             var fileName = "settings.yaml";
@@ -105,6 +125,8 @@ namespace PartyYomi
         /// </summary>
         private async void OnExit(object sender, ExitEventArgs e)
         {
+            Log.Information("PartyYomi is closing.");
+
             await _host.StopAsync();
 
             _host.Dispose();
@@ -116,6 +138,7 @@ namespace PartyYomi
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             // For more info see https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.dispatcherunhandledexception?view=windowsdesktop-6.0
+            Log.Error(e.Exception, "An unhandled exception occurred.");
         }
     }
 }

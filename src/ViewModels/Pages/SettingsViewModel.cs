@@ -1,5 +1,6 @@
 ﻿using ObservableCollections;
 using PartyYomi.FFXIV;
+using PartyYomi.Helpers;
 using PartyYomi.Models.Settings;
 using System.Threading;
 using System.Windows.Controls;
@@ -62,6 +63,7 @@ namespace PartyYomi.ViewModels.Pages
                 ?? String.Empty;
         }
 
+        [TraceMethod]
         [RelayCommand]
         private void OnChangeTheme(string parameter)
         {
@@ -89,12 +91,14 @@ namespace PartyYomi.ViewModels.Pages
             }
         }
 
+        [TraceMethod]
         [RelayCommand]
         private void OnUpdateNewPlayerName(object content)
         {
             NewPlayerName = content as string;
         }
 
+        [TraceMethod]
         [RelayCommand]
         private async Task OnAddPlayerInfo(object content)
         {
@@ -141,6 +145,7 @@ namespace PartyYomi.ViewModels.Pages
             //PlayerInfos = PartyYomiSettings.Instance.ChatSettings.PlayerInfos;
         }
 
+        [TraceMethod]
         [RelayCommand]
         private void OnRemovePlayerInfo()
         {

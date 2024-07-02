@@ -27,6 +27,7 @@ namespace PartyYomi.ViewModels.Windows
             }
         }
 
+        [TraceMethod]
         private void ChatLogItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             ChatQueue.oq.TryDequeue(out ChatLogItem? chat);
@@ -58,6 +59,7 @@ namespace PartyYomi.ViewModels.Windows
             }
         }
 
+        [TraceMethod]
         private void InitTTS()
         {
             tts.SetOutputToDefaultAudioDevice();

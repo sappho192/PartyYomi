@@ -1,10 +1,10 @@
 ﻿using YamlDotNet.Serialization.NamingConventions;
 using YamlDotNet.Serialization;
 using System.IO;
-using NLog.Fluent;
-using Newtonsoft.Json;
 using PartyYomi.FFXIV;
 using ObservableCollections;
+using PartyYomi.Helpers;
+using Serilog;
 
 namespace PartyYomi.Models.Settings
 {
@@ -16,6 +16,7 @@ namespace PartyYomi.Models.Settings
         public ChatSettings? ChatSettings { get; set; }
         public UISettings? UiSettings { get; set; }
 
+        [TraceMethod]
         public static PartyYomiSettings CreateDefault()
         {
             var settings = new PartyYomiSettings
@@ -65,10 +66,10 @@ namespace PartyYomi.Models.Settings
             return settings;
         }
 
+
         private void onSettingsChanged(string group, object sender, string name, object value, bool showValue = true)
         {
-            //string template = showValue ? " settings {@propertyName} changed to {@value}"
-            //        : " settings {@propertyName} changed";
+            Log.Information($"[Settings] {group}@{sender}.{name} → {value}");
             if (group.Equals("ChatChannel") && name.Equals("IsEnabled")) {
                 if ((bool)value)
                 {
@@ -78,7 +79,7 @@ namespace PartyYomi.Models.Settings
                 {
                     ChatSettings?.EnabledChatChannels.Remove((ChatChannel)sender);
                 }
-            }
+            } 
 
             UpdateSettingsFile(this);
         }
@@ -91,11 +92,14 @@ namespace PartyYomi.Models.Settings
             File.WriteAllText("settings.yaml", serializer.Serialize(settings));
         }
 
+        [TraceMethod]
         public static void InitializeSettingsChangedEvent(PartyYomiSettings settings)
         {
             settings.UiSettings.OnSettingsChanged += (sender, name, value) => { settings.onSettingsChanged("UI", sender, name, value); };
             settings.ChatSettings.OnSettingsChanged += (sender, name, value) => { settings.onSettingsChanged("Chat", sender, name, value); };
-            settings.ChatSettings.PlayerInfos.ForEach(playerInfo => playerInfo.OnSettingsChanged += (sender, name, value) => { settings.onSettingsChanged("PlayerInfo", sender, name, value); });
+            settings.ChatSettings.PlayerInfos.ForEach(playerInfo => playerInfo.OnSettingsChanged += (sender, name, value) => {
+                settings.onSettingsChanged("PlayerInfo", sender, name, value); 
+            });
             settings.ChatSettings.PlayerInfos.CollectionChanged += PlayerInfos_CollectionChanged;
             settings.ChatSettings.ChatChannels.ForEach(chatChannel => chatChannel.OnSettingsChanged += (sender, name, value) => { 
                 settings.onSettingsChanged("ChatChannel", sender, name, value); 
