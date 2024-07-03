@@ -28,6 +28,9 @@ namespace PartyYomi.ViewModels.Pages
         [ObservableProperty]
         private INotifyCollectionChangedSynchronizedView<ChatChannel> _enabledChatCodes =
             PartyYomiSettings.Instance.ChatSettings.ChatChannels.CreateView(chatCode => chatCode).ToNotifyCollectionChanged();
+        [ObservableProperty]
+        private INotifyCollectionChangedSynchronizedView<string> _UiLanguageList =
+            PartyYomiSettings.Instance.UiLanguages.LanguageList.CreateView(language => language).ToNotifyCollectionChanged();
 
         [ObservableProperty]
         private int _selectedPlayerIndex = -1;

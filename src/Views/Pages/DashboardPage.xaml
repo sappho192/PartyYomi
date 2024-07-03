@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:PartyYomi.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="DashboardPage"
     Style="{StaticResource PageAll}"
     d:DataContext="{d:DesignInstance local:DashboardPage,
@@ -54,7 +55,7 @@
                                 <ui:SymbolIcon Symbol="Settings16" FontSize="16"/>
                             </ui:Button>
                             <StackPanel Orientation="Horizontal">
-                                <ui:TextBlock FontTypography="BodyStrong" Text="확인하는 채널: "/>
+                                <ui:TextBlock FontTypography="BodyStrong" Text="{i18n:StringLocalizer dashboard.monitoring_channnel}"/>
                                 <!--<ui:TextBlock FontTypography="BodyStrong" Text="{Binding ViewModel.EnabledChatChannelCount}"/>-->
                             </StackPanel>
                         </DockPanel>
@@ -70,7 +71,7 @@
                             <ui:Button DockPanel.Dock="Right" Command="{Binding ViewModel.NavigateToSettingsPageCommand}">
                                 <ui:SymbolIcon Symbol="Settings16" FontSize="16"/>
                             </ui:Button>
-                            <ui:TextBlock FontTypography="BodyStrong" Text="아래 플레이어들의 채팅은 읽지 않음"/>
+                            <ui:TextBlock FontTypography="BodyStrong" Text="{i18n:StringLocalizer dashboard.ignored_players}"/>
                         </DockPanel>
                         <Border Height="16"/>
                         <ui:ListView ItemsSource="{Binding ViewModel.PlayerInfos}" IsEnabled="False"/>

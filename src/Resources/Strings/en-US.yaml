@@ -1,0 +1,21 @@
+﻿add: "Add"
+remove: "Remove"
+
+dashboard.monitoring_channnel: "Monitering channels: "
+dashboard.ignored_players: "Ignoring following player's chat"
+
+settings.general: "General"
+settings.general.theme: "Theme"
+settings.general.theme.light: "Light"
+settings.general.theme.dark: "Dark"
+settings.general.app_info: "About PartyYomi"
+
+settings.game: "In-game information"
+settings.game.chat: "Chat"
+settings.game.chat.ignored_players_list: "Ignore following player's chat (Click to edit)"
+settings.game.chat.enabled_channels_list: "Read chat from following channel (Click to edit)"
+
+settings.tts: "TTS"
+settings.tts.chat_language: "Chat language-specific settings"
+settings.tts.chat_language.japanese: "Japanese"
+settings.tts.chat_language.korean: "Korean"

@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:PartyYomi.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="SettingsPage"
     Style="{StaticResource PageAll}"
     d:DataContext="{d:DesignInstance local:SettingsPage,
@@ -31,37 +32,42 @@
     <TabControl Margin="0,48,0,16">
         <TabItem Name="Appearance">
             <TabItem.Header>
-                <ui:TextBlock Text="일반" FontWeight="Bold" FontTypography="Caption"/>
+                <ui:TextBlock Text="{i18n:StringLocalizer settings.general}" FontWeight="Bold" FontTypography="Caption"/>
             </TabItem.Header>
             <ui:Card VerticalAlignment="Stretch" VerticalContentAlignment="Top">
                 <StackPanel Margin="4,16,4,0">
-                    <ui:TextBlock FontTypography="Subtitle" Text="테마" />
+                    <ui:TextBlock FontTypography="Subtitle" Text="{i18n:StringLocalizer settings.general.theme}" />
                     <Border Height="8"/>
                     <RadioButton
                     Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
-                    CommandParameter="theme_light" Content="밝게" GroupName="themeSelect"
+                    CommandParameter="theme_light" Content="{i18n:StringLocalizer settings.general.theme.light}" GroupName="themeSelect"
                     IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}" />
                     <RadioButton
                     Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
-                    Margin="0,8,0,0" CommandParameter="theme_dark" Content="어둡게" GroupName="themeSelect"
+                    Margin="0,8,0,0" CommandParameter="theme_dark" Content="{i18n:StringLocalizer settings.general.theme.dark}" GroupName="themeSelect"
                     IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
+
                     <ui:TextBlock Margin="0,24,0,0" FontTypography="Subtitle"
-                    Text="PartyYomi 정보" />
+                    Text="{i18n:StringLocalizer settings.general.language}" />
+                    <ComboBox ItemsSource="{Binding ViewModel.UiLanguageList}"/>
+
+                    <ui:TextBlock Margin="0,24,0,0" FontTypography="Subtitle"
+                    Text="{i18n:StringLocalizer settings.general.app_info}" />
                     <ui:TextBlock Margin="0,12,0,0" FontTypography="Body" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
                 </StackPanel>
             </ui:Card>
         </TabItem>
         <TabItem Name="Game">
             <TabItem.Header>
-                <ui:TextBlock FontWeight="Bold" FontTypography="Caption" Text="게임 내 정보"/>
+                <ui:TextBlock FontWeight="Bold" FontTypography="Caption" Text="{i18n:StringLocalizer settings.game}"/>
             </TabItem.Header>
             <ui:Card VerticalAlignment="Stretch" VerticalContentAlignment="Top">
                 <StackPanel Margin="4,16,4,0">
-                    <ui:TextBlock FontTypography="Subtitle" Text="채팅" />
+                    <ui:TextBlock FontTypography="Subtitle" Text="{i18n:StringLocalizer settings.game.chat}" />
                     <Border Height="8"/>
                     <ui:CardExpander>
                         <ui:CardExpander.Header>
-                            <ui:TextBlock Margin="0,12,0,0" FontTypography="BodyStrong" Text="채팅을 읽지 않을 플레이어 목록 (클릭하여 편집)" />
+                            <ui:TextBlock Margin="0,12,0,0" FontTypography="BodyStrong" Text="{i18n:StringLocalizer settings.game.chat.ignored_players_list}" />
                         </ui:CardExpander.Header>
                         <ui:CardExpander.Content>
                             <StackPanel Orientation="Vertical">
@@ -73,9 +79,9 @@
                                     <StackPanel Orientation="Horizontal">
                                         <Button Command="{Binding ViewModel.AddPlayerInfoCommand, IsAsync=True}" 
                             CommandParameter="{StaticResource DialogContent}"
-                            Content="추가"/>
+                            Content="{i18n:StringLocalizer add}"/>
                                         <Border Width="8"/>
-                                        <Button Command="{Binding ViewModel.RemovePlayerInfoCommand}" Content="제거"/>
+                                        <Button Command="{Binding ViewModel.RemovePlayerInfoCommand}" Content="{i18n:StringLocalizer remove}"/>
                                     </StackPanel>
                                     <ui:ListView Grid.Row="1" Margin="0,8,0,0" ItemsSource="{Binding ViewModel.PlayerInfos, Mode=TwoWay}"
                         SelectionChanged="ListView_SelectionChanged"/>
@@ -85,7 +91,7 @@
                     </ui:CardExpander>
                     <ui:CardExpander>
                         <ui:CardExpander.Header>
-                            <ui:TextBlock Margin="0,12,0,0" FontTypography="BodyStrong" Text="TTS로 읽을 채널 목록 (클릭하여 편집)" />
+                            <ui:TextBlock Margin="0,12,0,0" FontTypography="BodyStrong" Text="{i18n:StringLocalizer settings.game.chat.enabled_channels_list}" />
                         </ui:CardExpander.Header>
                         <ui:CardExpander.Content>
                             <StackPanel Orientation="Vertical">
@@ -114,14 +120,14 @@
         </TabItem>
         <TabItem Name="TTS">
             <TabItem.Header>
-                <ui:TextBlock Text="TTS" FontWeight="Bold" FontTypography="Caption"/>
+                <ui:TextBlock Text="{i18n:StringLocalizer settings.tts}" FontWeight="Bold" FontTypography="Caption"/>
             </TabItem.Header>
             <ui:Card VerticalAlignment="Stretch" VerticalContentAlignment="Top">
                 <StackPanel Margin="4,16,4,0">
-                    <ui:TextBlock FontTypography="Subtitle" Text="채팅 언어별 설정" />
+                    <ui:TextBlock FontTypography="Subtitle" Text="{i18n:StringLocalizer settings.tts.chat_language}" />
                     <Border Height="8"/>
-                    <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="일본어" />
-                    <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="한국어" />
+                    <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="{i18n:StringLocalizer settings.tts.chat_language.japanese}" />
+                    <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="{i18n:StringLocalizer settings.tts.chat_language.korean}" />
                 </StackPanel>
             </ui:Card>
         </TabItem>

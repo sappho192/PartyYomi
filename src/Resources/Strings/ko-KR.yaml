@@ -1,0 +1,22 @@
+﻿add: "추가"
+remove: "제거"
+
+dashboard.monitoring_channnel: "확인하는 채널: "
+dashboard.ignored_players: "아래 플레이어들의 채팅은 읽지 않음"
+
+settings.general: "일반"
+settings.general.theme: "테마"
+settings.general.theme.light: "밝게"
+settings.general.theme.dark: "어둡게"
+settings.general.language: "언어"
+settings.general.app_info: "PartyYomi 정보"
+
+settings.game: "게임 내 정보"
+settings.game.chat: "채팅"
+settings.game.chat.ignored_players_list: "채팅을 읽지 않을 플레이어 목록 (클릭하여 편집)"
+settings.game.chat.enabled_channels_list: "TTS로 읽을 채널 목록 (클릭하여 편집)"
+
+settings.tts: "TTS"
+settings.tts.chat_language: "채팅 언어별 설정"
+settings.tts.chat_language.japanese: "일본어"
+settings.tts.chat_language.korean: "한국어"

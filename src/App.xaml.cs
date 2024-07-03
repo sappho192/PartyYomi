@@ -15,6 +15,8 @@ using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using Serilog;
 using PartyYomi.Helpers;
+using Lepo.i18n.DependencyInjection;
+using Lepo.i18n.Yaml;
 
 namespace PartyYomi
 {
@@ -34,6 +36,14 @@ namespace PartyYomi
             .ConfigureServices((context, services) =>
             {
                 services.AddHostedService<ApplicationHostService>();
+
+                // Add i18n
+                services.AddStringLocalizer(b =>
+                {
+                    b.FromYaml(Assembly.GetExecutingAssembly(), "Resources/Strings/ko-KR.yaml", new("ko-KR"));
+                    b.FromYaml(Assembly.GetExecutingAssembly(), "Resources/Strings/en-US.yaml", new("en-US"));
+                });
+                Localizer.ChangeLanguage(PartyYomiSettings.Instance.UiLanguages.CurrentLanguage);
 
                 // Page resolver service
                 services.AddSingleton<IPageService, PageService>();

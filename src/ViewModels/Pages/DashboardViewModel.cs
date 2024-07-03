@@ -1,10 +1,7 @@
-﻿using ObservableCollections;
-using PartyYomi.FFXIV;
+﻿using Lepo.i18n;
+using ObservableCollections;
 using PartyYomi.Helpers;
 using PartyYomi.Models.Settings;
-using PartyYomi.Services;
-using PartyYomi.Views.Windows;
-using System.Reflection;
 using Wpf.Ui;
 
 namespace PartyYomi.ViewModels.Pages
@@ -43,6 +40,7 @@ namespace PartyYomi.ViewModels.Pages
                 _isSpeechActive = false;
             }
             OnSpeechToggle();
+            var helloString = Localizer.getString("other.namespace.main.hello");
         }
 
         [TraceMethod]
@@ -55,7 +53,6 @@ namespace PartyYomi.ViewModels.Pages
                 SpeechToggleDescription = "게임 내 채팅을 읽을 준비가 되어있습니다.";
                 SpeechIcon = "DesktopSpeaker20";
                 PartyYomiSettings.Instance.UiSettings.IsTtsEnabled = true;
-
             }
             else
             {
