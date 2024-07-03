@@ -6,6 +6,11 @@
 
 TTS program which reads in-game party chat of Final Fantasy XIV
 
+## Supported UI Language
+
+- English (en-US)
+- Korean (ko-KR)
+
 ## Key Features
 
 * [X] Can choose which chat channel to listen
