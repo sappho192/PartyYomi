@@ -49,7 +49,11 @@
 
                     <ui:TextBlock Margin="0,24,0,0" FontTypography="Subtitle"
                     Text="{i18n:StringLocalizer settings.general.language}" />
-                    <ComboBox ItemsSource="{Binding ViewModel.UiLanguageList}"/>
+                    <ui:TextBlock Margin="0,8,0,8" FontTypography="Caption"
+                        Text="{i18n:StringLocalizer settings.general.language.comment}" />
+                    <ComboBox ItemsSource="{Binding ViewModel.UiLanguageList}"
+                              SelectedIndex="{Binding ViewModel.SelectedUiLanguageIndex}"
+                              SelectionChanged="ComboBox_SelectionChanged"/>
 
                     <ui:TextBlock Margin="0,24,0,0" FontTypography="Subtitle"
                     Text="{i18n:StringLocalizer settings.general.app_info}" />

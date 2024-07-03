@@ -1,10 +1,6 @@
 ﻿using ObservableCollections;
-using PartyYomi.FFXIV;
 using PartyYomi.Helpers;
 using PartyYomi.Models.Settings;
-using System.Threading;
-using System.Windows.Controls;
-using System.Windows.Navigation;
 using Wpf.Ui;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
@@ -28,9 +24,12 @@ namespace PartyYomi.ViewModels.Pages
         [ObservableProperty]
         private INotifyCollectionChangedSynchronizedView<ChatChannel> _enabledChatCodes =
             PartyYomiSettings.Instance.ChatSettings.ChatChannels.CreateView(chatCode => chatCode).ToNotifyCollectionChanged();
+        
         [ObservableProperty]
-        private INotifyCollectionChangedSynchronizedView<string> _UiLanguageList =
-            PartyYomiSettings.Instance.UiLanguages.LanguageList.CreateView(language => language).ToNotifyCollectionChanged();
+        private INotifyCollectionChangedSynchronizedView<UILanguage> _UiLanguageList =
+            UILanguages.LanguageList.CreateView(language => language).ToNotifyCollectionChanged();
+        [ObservableProperty]
+        private int _selectedUiLanguageIndex;
 
         [ObservableProperty]
         private int _selectedPlayerIndex = -1;
@@ -56,6 +55,7 @@ namespace PartyYomi.ViewModels.Pages
         {
             CurrentTheme = ApplicationThemeManager.GetAppTheme();
             AppVersion = $"PartyYomi - {GetAssemblyVersion()}";
+            SelectedUiLanguageIndex = UILanguages.LanguageList.IndexOf(PartyYomiSettings.Instance.UiLanguages.CurrentLanguage);
 
             _isInitialized = true;
         }

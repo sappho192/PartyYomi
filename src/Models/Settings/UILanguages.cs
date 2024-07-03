@@ -6,7 +6,7 @@ namespace PartyYomi.Models.Settings
 {
     public class UILanguages : ISettingsChangedEvent
     {
-        public string? CurrentLanguage
+        public UILanguage? CurrentLanguage
         {
             get => language;
             set
@@ -18,10 +18,10 @@ namespace PartyYomi.Models.Settings
                 }
             }
         }
-        private string? language;
+        private UILanguage? language;
 
         [YamlIgnore]
-        public ObservableList<string> LanguageList
+        public static ObservableList<UILanguage> LanguageList
         {
             get => languageList;
             set
@@ -29,13 +29,13 @@ namespace PartyYomi.Models.Settings
                 if (value != languageList)
                 {
                     languageList = value;
-                    OnSettingsChanged?.Invoke(this, nameof(LanguageList), languageList);
                 }
             }
         }
-        private ObservableList<string> languageList =
+        private static ObservableList<UILanguage> languageList =
         [
-            "English", "한국어"
+            new UILanguage { Code = "ko-KR", Name = "한국어(대한민국)" },
+            new UILanguage { Code = "en-US", Name = "English" },
         ];
 
         public event SettingsChangedEventHandler OnSettingsChanged;

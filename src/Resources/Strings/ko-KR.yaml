@@ -1,6 +1,13 @@
 ﻿add: "추가"
 remove: "제거"
 
+main.tts.not_installed: "Microsoft Haruka Desktop 음성을 설치해주세요."
+main.navigation.settings: "설정"
+
+dashboard.tts.enabled: "TTS 작동 중"
+dashboard.tts.enabled.description: "게임 내 채팅을 읽을 준비가 되어있습니다."
+dashboard.tts.disabled: "TTS 작동 중지됨"
+dashboard.tts.disabled.description: "TTS를 활성화하여 게임 내 채팅을 읽게 해보세요."
 dashboard.monitoring_channnel: "확인하는 채널: "
 dashboard.ignored_players: "아래 플레이어들의 채팅은 읽지 않음"
 
@@ -9,6 +16,7 @@ settings.general.theme: "테마"
 settings.general.theme.light: "밝게"
 settings.general.theme.dark: "어둡게"
 settings.general.language: "언어"
+settings.general.language.comment: "프로그램 재시작 후에 적용됩니다."
 settings.general.app_info: "PartyYomi 정보"
 
 settings.game: "게임 내 정보"

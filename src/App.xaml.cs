@@ -43,7 +43,7 @@ namespace PartyYomi
                     b.FromYaml(Assembly.GetExecutingAssembly(), "Resources/Strings/ko-KR.yaml", new("ko-KR"));
                     b.FromYaml(Assembly.GetExecutingAssembly(), "Resources/Strings/en-US.yaml", new("en-US"));
                 });
-                Localizer.ChangeLanguage(PartyYomiSettings.Instance.UiLanguages.CurrentLanguage);
+                Localizer.ChangeLanguage(PartyYomiSettings.Instance.UiLanguages.CurrentLanguage.Code);
 
                 // Page resolver service
                 services.AddSingleton<IPageService, PageService>();

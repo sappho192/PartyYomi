@@ -62,7 +62,7 @@ namespace PartyYomi.Models.Settings
                 },
                 UiLanguages = new UILanguages
                 {
-                    CurrentLanguage = CultureInfo.CurrentCulture.ToString()
+                    CurrentLanguage = UILanguages.LanguageList.First()
                 }
             };
             var serializer = new SerializerBuilder()

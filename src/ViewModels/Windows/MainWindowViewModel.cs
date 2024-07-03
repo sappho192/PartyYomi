@@ -68,7 +68,7 @@ namespace PartyYomi.ViewModels.Windows
             // Exit if "Microsoft Haruka Desktop" is not installed
             if (list.Find(x => x.VoiceInfo.Name == "Microsoft Haruka Desktop") == null)
             {
-                string message = "Microsoft Haruka Desktop 음성을 설치해주세요.";
+                string message = Localizer.getString("main.tts.not_installed");
                 Log.Error(message);
                 if (System.Windows.MessageBox.Show(message) == System.Windows.MessageBoxResult.OK)
                 {
@@ -92,25 +92,25 @@ namespace PartyYomi.ViewModels.Windows
         private string _applicationTitle = "PartyYomi";
 
         [ObservableProperty]
-        private ObservableCollection<object> _menuItems = new()
-        {
+        private ObservableCollection<object> _menuItems =
+        [
             new NavigationViewItem()
             {
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
                 TargetPageType = typeof(Views.Pages.DashboardPage)
             }
-        };
+        ];
 
         [ObservableProperty]
-        private ObservableCollection<object> _footerMenuItems = new()
-        {
+        private ObservableCollection<object> _footerMenuItems =
+        [
             new NavigationViewItem()
             {
-                Content = "설정",
+                Content = Localizer.getString("main.navigation.settings"),
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
                 TargetPageType = typeof(Views.Pages.SettingsPage)
             }
-        };
+        ];
 
         [ObservableProperty]
         private ObservableCollection<MenuItem> _trayMenuItems = new()
