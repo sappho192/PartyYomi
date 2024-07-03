@@ -1,6 +1,7 @@
 ﻿using PartyYomi.FFXIV;
 using PartyYomi.Helpers;
 using PartyYomi.Models.Settings;
+using Serilog;
 using Sharlayan.Core;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -67,7 +68,9 @@ namespace PartyYomi.ViewModels.Windows
             // Exit if "Microsoft Haruka Desktop" is not installed
             if (list.Find(x => x.VoiceInfo.Name == "Microsoft Haruka Desktop") == null)
             {
-                if (System.Windows.MessageBox.Show("Microsoft Haruka Desktop 음성을 설치해주세요.") == System.Windows.MessageBoxResult.OK)
+                string message = "Microsoft Haruka Desktop 음성을 설치해주세요.";
+                Log.Error(message);
+                if (System.Windows.MessageBox.Show(message) == System.Windows.MessageBoxResult.OK)
                 {
                     var ps = new ProcessStartInfo("https://github.com/sappho192/PartyYomi/wiki/%EC%9C%88%EB%8F%84%EC%9A%B0-TTS-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0")
                     {

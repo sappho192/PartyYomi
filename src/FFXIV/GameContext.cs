@@ -4,6 +4,7 @@ using Sharlayan.Models;
 using Sharlayan;
 using System.Diagnostics;
 using PartyYomi.Helpers;
+using Serilog;
 
 namespace PartyYomi.FFXIV
 {
@@ -27,8 +28,7 @@ namespace PartyYomi.FFXIV
 
         protected GameContext()
         {
-            Attached = AttachGame();
-            if (Attached)
+            if (AttachGame())
             {
                 const int period = 500;
                 chatTimer = new Timer(RefreshChat, null, 0, period);
@@ -109,8 +109,9 @@ namespace PartyYomi.FFXIV
             }
             else
             {
-                //Log.Fatal($"Can't find {processName}.exe");
-                MessageBox.Show($"파판을 먼저 켠 다음에 파티요미를 실행해주세요.");
+                string message = "파판을 먼저 켠 다음에 파티요미를 실행해주세요.";
+                Log.Error(message);
+                MessageBox.Show(message);
                 return false;
             }
         }
