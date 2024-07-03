@@ -70,6 +70,16 @@ namespace PartyYomi
             return _host.Services.GetService(typeof(T)) as T;
         }
 
+        public static void RequestShutdown()
+        {
+            _host.StopAsync().Wait();
+            Log.Information("PartyYomi is closing.");
+            Log.CloseAndFlush();
+            _host.Dispose();
+
+            Current.Shutdown();
+        }
+
         /// <summary>
         /// Occurs when the application is loading.
         /// </summary>

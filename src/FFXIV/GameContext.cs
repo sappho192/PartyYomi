@@ -37,7 +37,7 @@ namespace PartyYomi.FFXIV
             }
             else
             {
-                Application.Current.Shutdown();
+                App.RequestShutdown();
             }
         }
 

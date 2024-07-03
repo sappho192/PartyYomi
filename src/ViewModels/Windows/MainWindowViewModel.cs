@@ -79,7 +79,7 @@ namespace PartyYomi.ViewModels.Windows
                     };
                     Process.Start(ps);
                 }
-                Application.Current.Shutdown();
+                App.RequestShutdown();
             }
 
             tts.SelectVoice("Microsoft Haruka Desktop");
