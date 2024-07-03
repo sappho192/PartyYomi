@@ -5,6 +5,7 @@ using PartyYomi.FFXIV;
 using ObservableCollections;
 using PartyYomi.Helpers;
 using Serilog;
+using System.Globalization;
 
 namespace PartyYomi.Models.Settings
 {
@@ -15,6 +16,7 @@ namespace PartyYomi.Models.Settings
         public bool? StandaloneMode { get; set; }
         public ChatSettings? ChatSettings { get; set; }
         public UISettings? UiSettings { get; set; }
+        public UILanguages? UiLanguages { get; set; }
 
         [TraceMethod]
         public static PartyYomiSettings CreateDefault()
@@ -51,12 +53,16 @@ namespace PartyYomi.Models.Settings
                         new ChatChannel { Name = "CWLinkShell8", ChatCode = (int)ChatCode.CWLinkShell8, IsEnabled = false },
                         new ChatChannel { Name = "FreeCompany", ChatCode = (int)ChatCode.FreeCompany,  IsEnabled = false },
                         ],
-                    EnabledChatChannels = []
+                    EnabledChatChannels = [],
                 },
                 UiSettings = new UISettings
                 {
                     Theme = PartyYomiTheme.Light,
                     IsTtsEnabled = true
+                },
+                UiLanguages = new UILanguages
+                {
+                    CurrentLanguage = UILanguages.LanguageList.First()
                 }
             };
             var serializer = new SerializerBuilder()
@@ -113,6 +119,8 @@ namespace PartyYomi.Models.Settings
                 }
             }
             settings.ChatSettings.EnabledChatChannels.CollectionChanged += EnabledChatChannels_CollectionChanged;
+
+            settings.UiLanguages.OnSettingsChanged += (sender, name, value) => { settings.onSettingsChanged("UILanguages", sender, name, value); };
         }
 
         private static void EnabledChatChannels_CollectionChanged(in NotifyCollectionChangedEventArgs<ChatChannel> e)

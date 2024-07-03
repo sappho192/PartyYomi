@@ -1,4 +1,5 @@
-﻿using PartyYomi.ViewModels.Pages;
+﻿using PartyYomi.Models.Settings;
+using PartyYomi.ViewModels.Pages;
 using Wpf.Ui.Controls;
 
 namespace PartyYomi.Views.Pages
@@ -28,6 +29,13 @@ namespace PartyYomi.Views.Pages
             {
                 ViewModel.NewPlayerName = tbName.Text;
             }
+        }
+
+        private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            var comboBox = sender as System.Windows.Controls.ComboBox;
+            ViewModel.SelectedUiLanguageIndex = comboBox.SelectedIndex;
+            PartyYomiSettings.Instance.UiLanguages.CurrentLanguage = UILanguages.LanguageList[ViewModel.SelectedUiLanguageIndex];
         }
     }
 }

@@ -1,10 +1,6 @@
 ﻿using ObservableCollections;
-using PartyYomi.FFXIV;
 using PartyYomi.Helpers;
 using PartyYomi.Models.Settings;
-using PartyYomi.Services;
-using PartyYomi.Views.Windows;
-using System.Reflection;
 using Wpf.Ui;
 
 namespace PartyYomi.ViewModels.Pages
@@ -16,9 +12,9 @@ namespace PartyYomi.ViewModels.Pages
         [ObservableProperty]
         private bool _isSpeechActive = true;
         [ObservableProperty]
-        private string _speechToggleState = "TTS 작동 중";
+        private string _speechToggleState = Localizer.getString("dashboard.tts.enabled");
         [ObservableProperty]
-        private string _speechToggleDescription = "게임 내 채팅을 읽을 준비가 되어있습니다.";
+        private string _speechToggleDescription = Localizer.getString("dashboard.tts.enabled.description");
         [ObservableProperty]
         private string _speechIcon = "DesktopSpeaker20";
         [ObservableProperty]
@@ -51,16 +47,15 @@ namespace PartyYomi.ViewModels.Pages
         {
             if (IsSpeechActive)
             {
-                SpeechToggleState = "TTS 작동 중";
-                SpeechToggleDescription = "게임 내 채팅을 읽을 준비가 되어있습니다.";
+                SpeechToggleState = Localizer.getString("dashboard.tts.enabled");
+                SpeechToggleDescription = Localizer.getString("dashboard.tts.enabled.description");
                 SpeechIcon = "DesktopSpeaker20";
                 PartyYomiSettings.Instance.UiSettings.IsTtsEnabled = true;
-
             }
             else
             {
-                SpeechToggleState = "TTS 작동 중지됨";
-                SpeechToggleDescription = "TTS를 활성화하여 게임 내 채팅을 읽게 해보세요.";
+                SpeechToggleState = Localizer.getString("dashboard.tts.disabled");
+                SpeechToggleDescription = Localizer.getString("dashboard.tts.disabled.description");
                 SpeechIcon = "DesktopSpeakerOff20";
                 PartyYomiSettings.Instance.UiSettings.IsTtsEnabled = false;
             }

@@ -1,0 +1,30 @@
+﻿add: "Add"
+remove: "Remove"
+
+main.tts.not_installed: "Please install the TTS voice: Microsoft Haruka Desktop"
+main.navigation.settings: "Settings"
+
+dashboard.tts.enabled: "TTS is enabled"
+dashboard.tts.enabled.description: "Ready to read in-game chat."
+dashboard.tts.disabled: "TTS is disabled"
+dashboard.tts.disabled.description: "Enable TTS to read in-game chat."
+dashboard.monitoring_channnel: "Monitering channels: "
+dashboard.ignored_players: "Ignoring following player's chat"
+
+settings.general: "General"
+settings.general.theme: "Theme"
+settings.general.theme.light: "Light"
+settings.general.theme.dark: "Dark"
+settings.general.language: "Language"
+settings.general.language.comment: "Takes effect after the program restarts."
+settings.general.app_info: "About PartyYomi"
+
+settings.game: "In-game information"
+settings.game.chat: "Chat"
+settings.game.chat.ignored_players_list: "Ignore following player's chat (Click to edit)"
+settings.game.chat.enabled_channels_list: "Read chat from following channel (Click to edit)"
+
+settings.tts: "TTS"
+settings.tts.chat_language: "Chat language-specific settings"
+settings.tts.chat_language.japanese: "Japanese"
+settings.tts.chat_language.korean: "Korean"
