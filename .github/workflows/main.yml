@@ -25,13 +25,11 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
+    - name: Publish
+      run: dotnet publish -r win-x64
     - name: 'Artifacts'
       uses: actions/upload-artifact@v4
       with:
         name: Built program
         path: |
-          src/bin/Release/net8.0-windows
+          src/bin/Release/net8.0-windows/win-x64/publish
