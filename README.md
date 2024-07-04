@@ -13,8 +13,9 @@ TTS program which reads in-game party chat of Final Fantasy XIV
 
 ## Key Features
 
-* [X] Can choose which chat channel to listen
-* [X] Can ignore specific player's chat
+* [X] Choose which chat channel to listen
+* [X] Ignore specific player's chat
+* [X] Adjust the volume and rate(speed) of TTS
 * [ ] Change the TTS engine per chat language
 
 ![demo01](rsc/demo01.PNG)
