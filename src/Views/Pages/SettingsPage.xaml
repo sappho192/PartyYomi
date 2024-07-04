@@ -127,11 +127,62 @@
                 <ui:TextBlock Text="{i18n:StringLocalizer settings.tts}" FontWeight="Bold" FontTypography="Caption"/>
             </TabItem.Header>
             <ui:Card VerticalAlignment="Stretch" VerticalContentAlignment="Top">
-                <StackPanel Margin="4,16,4,0">
-                    <ui:TextBlock FontTypography="Subtitle" Text="{i18n:StringLocalizer settings.tts.chat_language}" />
-                    <Border Height="8"/>
-                    <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="{i18n:StringLocalizer settings.tts.chat_language.japanese}" />
-                    <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="{i18n:StringLocalizer settings.tts.chat_language.korean}" />
+                <StackPanel Orientation="Vertical">
+                    <StackPanel>
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <ui:Button Content="{i18n:StringLocalizer settings.tts.general.preview}"
+                                           Command="{Binding ViewModel.PreviewVoiceCommand}"/>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="0,0,0,8">
+                                <ui:SymbolIcon Symbol="DesktopSpeaker24" FontSize="24"/>
+                                <Border Width="8"/>
+                                <ui:TextBlock FontTypography="Subtitle" Text="{i18n:StringLocalizer settings.tts.general}" />
+                            </StackPanel>
+                        </DockPanel>
+                        <ui:CardControl Icon="{ui:SymbolIcon Speaker248}">
+                            <ui:CardControl.Header>
+                                <StackPanel Orientation="Vertical">
+                                    <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="{i18n:StringLocalizer settings.tts.general.volume}" />
+                                    <StackPanel>
+                                        <ui:TextBlock FontTypography="Caption" Text="{i18n:StringLocalizer settings.tts.general.hint}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </ui:CardControl.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:TextBlock FontTypography="Body" Margin="0,0,8,0"
+                                    Text="{Binding ViewModel.GlobalVolume, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SettingsPage}, Mode=OneWay}"/>
+                                <Slider Value="{Binding ViewModel.GlobalVolume, Mode=TwoWay}" Minimum="0" Maximum="100"
+                                    Width="200" TickFrequency="2" IsSnapToTickEnabled="True"
+                                    ValueChanged="GlobalVolumeSlider_ValueChanged"
+                                    MouseDoubleClick="GlobalVolumeSlider_MouseDoubleClick" />
+                            </StackPanel>
+                        </ui:CardControl>
+                        <ui:CardControl Icon="{ui:SymbolIcon TopSpeed24}">
+                            <ui:CardControl.Header>
+                                <StackPanel Orientation="Vertical">
+                                    <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="{i18n:StringLocalizer settings.tts.general.rate}" />
+                                    <StackPanel>
+                                        <ui:TextBlock FontTypography="Caption" Text="{i18n:StringLocalizer settings.tts.general.hint}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </ui:CardControl.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:TextBlock FontTypography="Body" Margin="0,0,8,0"
+                                    Text="{Binding ViewModel.GlobalRate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:SettingsPage}, Mode=OneWay}"/>
+                                <Slider Value="{Binding ViewModel.GlobalRate, Mode=TwoWay}" Minimum="-10" Maximum="10"
+                                    Width="200" TickPlacement="Both"
+                                    ValueChanged="GlobalRateSlider_ValueChanged" 
+                                    MouseDoubleClick="GlobalRateSlider_MouseDoubleClick"/>
+                            </StackPanel>
+                        </ui:CardControl>
+                    </StackPanel>
+                    <Border Height="16"/>
+                    <StackPanel>
+                        <ui:TextBlock FontTypography="Subtitle" Text="{i18n:StringLocalizer settings.tts.chat_language}" />
+                        <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="{i18n:StringLocalizer settings.tts.chat_language.japanese}" />
+                        <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="{i18n:StringLocalizer settings.tts.chat_language.korean}" />
+                    </StackPanel>
                 </StackPanel>
             </ui:Card>
         </TabItem>

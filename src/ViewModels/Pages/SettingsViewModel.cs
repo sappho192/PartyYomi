@@ -1,5 +1,6 @@
 ﻿using ObservableCollections;
 using PartyYomi.Helpers;
+using PartyYomi.Models;
 using PartyYomi.Models.Settings;
 using Wpf.Ui;
 using Wpf.Ui.Appearance;
@@ -24,7 +25,7 @@ namespace PartyYomi.ViewModels.Pages
         [ObservableProperty]
         private INotifyCollectionChangedSynchronizedView<ChatChannel> _enabledChatCodes =
             PartyYomiSettings.Instance.ChatSettings.ChatChannels.CreateView(chatCode => chatCode).ToNotifyCollectionChanged();
-        
+
         [ObservableProperty]
         private INotifyCollectionChangedSynchronizedView<UILanguage> _UiLanguageList =
             UILanguages.LanguageList.CreateView(language => language).ToNotifyCollectionChanged();
@@ -36,6 +37,11 @@ namespace PartyYomi.ViewModels.Pages
 
         [ObservableProperty]
         private string _newPlayerName = string.Empty;
+
+        [ObservableProperty]
+        private int _globalVolume = PartyYomiSettings.Instance.VoiceSettings.GlobalVolume;
+        [ObservableProperty]
+        private int _globalRate = PartyYomiSettings.Instance.VoiceSettings.GlobalRate;
 
         private readonly IContentDialogService _contentDialogService;
         public SettingsViewModel(IContentDialogService contentDialogService)
@@ -63,7 +69,7 @@ namespace PartyYomi.ViewModels.Pages
         private string GetAssemblyVersion()
         {
             return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
-                ?? String.Empty;
+                ?? string.Empty;
         }
 
         [TraceMethod]
@@ -156,6 +162,12 @@ namespace PartyYomi.ViewModels.Pages
                 return;
             PartyYomiSettings.Instance.ChatSettings.PlayerInfos.RemoveAt(SelectedPlayerIndex);
             //PlayerInfos = PartyYomiSettings.Instance.ChatSettings.PlayerInfos;
+        }
+
+        [RelayCommand]
+        private void OnPreviewVoice()
+        {
+            GlobalSpeech.defaultTTS.Speak("パーティー読み");
         }
     }
 }

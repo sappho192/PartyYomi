@@ -25,6 +25,11 @@ settings.game.chat.ignored_players_list: "Ignore following player's chat (Click 
 settings.game.chat.enabled_channels_list: "Read chat from following channel (Click to edit)"
 
 settings.tts: "TTS"
+settings.tts.general: "Voice"
+settings.tts.general.preview: "Preview"
+settings.tts.general.hint: "Double-click the slider to reset the value"
+settings.tts.general.volume: "Volume"
+settings.tts.general.rate: "Rate"
 settings.tts.chat_language: "Chat language-specific settings"
 settings.tts.chat_language.japanese: "Japanese"
 settings.tts.chat_language.korean: "Korean"
