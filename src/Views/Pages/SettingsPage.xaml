@@ -35,20 +35,37 @@
                 <ui:TextBlock Text="{i18n:StringLocalizer settings.general}" FontWeight="Bold" FontTypography="Caption"/>
             </TabItem.Header>
             <ui:Card VerticalAlignment="Stretch" VerticalContentAlignment="Top">
-                <StackPanel Margin="4,16,4,0">
-                    <ui:TextBlock FontTypography="Subtitle" Text="{i18n:StringLocalizer settings.general.theme}" />
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Symbol="Color24" FontSize="36"/>
+                        <Border Width="8"/>
+                        <ui:TextBlock FontTypography="Subtitle" Text="{i18n:StringLocalizer settings.general.theme}" VerticalAlignment="Bottom"/>
+                    </StackPanel>
                     <Border Height="8"/>
-                    <RadioButton
-                    Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
-                    CommandParameter="theme_light" Content="{i18n:StringLocalizer settings.general.theme.light}" GroupName="themeSelect"
-                    IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}" />
-                    <RadioButton
-                    Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
-                    Margin="0,8,0,0" CommandParameter="theme_dark" Content="{i18n:StringLocalizer settings.general.theme.dark}" GroupName="themeSelect"
-                    IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
-
-                    <ui:TextBlock Margin="0,24,0,0" FontTypography="Subtitle"
-                    Text="{i18n:StringLocalizer settings.general.language}" />
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Symbol="WeatherSunny24" FontSize="24"/>
+                        <Border Width="8"/>
+                        <RadioButton
+                            Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
+                            CommandParameter="theme_light" Content="{i18n:StringLocalizer settings.general.theme.light}" GroupName="themeSelect"
+                            IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Symbol="WeatherMoon24" FontSize="24" Filled="True"/>
+                        <Border Width="8"/>
+                        <RadioButton
+                            Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
+                            Margin="0,8,0,0" CommandParameter="theme_dark" Content="{i18n:StringLocalizer settings.general.theme.dark}" GroupName="themeSelect"
+                            IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
+                    </StackPanel>
+                    <Border Height="16"/>
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Symbol="LocalLanguage24" FontSize="30"/>
+                        <Border Width="8"/>
+                        <ui:TextBlock Margin="0,24,0,0" FontTypography="Subtitle"
+                            Text="{i18n:StringLocalizer settings.general.language}" 
+                            VerticalAlignment="Bottom"/>
+                    </StackPanel>
                     <ui:TextBlock Margin="0,8,0,8" FontTypography="Caption"
                         Text="{i18n:StringLocalizer settings.general.language.comment}" />
                     <ComboBox ItemsSource="{Binding ViewModel.UiLanguageList}"
@@ -66,8 +83,12 @@
                 <ui:TextBlock FontWeight="Bold" FontTypography="Caption" Text="{i18n:StringLocalizer settings.game}"/>
             </TabItem.Header>
             <ui:Card VerticalAlignment="Stretch" VerticalContentAlignment="Top">
-                <StackPanel Margin="4,16,4,0">
-                    <ui:TextBlock FontTypography="Subtitle" Text="{i18n:StringLocalizer settings.game.chat}" />
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon Symbol="CalendarChat24" FontSize="36"/>
+                        <Border Width="8"/>
+                        <ui:TextBlock FontTypography="Subtitle" Text="{i18n:StringLocalizer settings.game.chat}" VerticalAlignment="Bottom"/>
+                    </StackPanel>
                     <Border Height="8"/>
                     <ui:CardExpander>
                         <ui:CardExpander.Header>
@@ -135,9 +156,9 @@
                                            Command="{Binding ViewModel.PreviewVoiceCommand}"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="0,0,0,8">
-                                <ui:SymbolIcon Symbol="DesktopSpeaker24" FontSize="24"/>
+                                <ui:SymbolIcon Symbol="DesktopSpeaker24" FontSize="36"/>
                                 <Border Width="8"/>
-                                <ui:TextBlock FontTypography="Subtitle" Text="{i18n:StringLocalizer settings.tts.general}" />
+                                <ui:TextBlock VerticalAlignment="Bottom" FontTypography="Subtitle" Text="{i18n:StringLocalizer settings.tts.general}" />
                             </StackPanel>
                         </DockPanel>
                         <ui:CardControl Icon="{ui:SymbolIcon Speaker248}">
@@ -179,7 +200,12 @@
                     </StackPanel>
                     <Border Height="16"/>
                     <StackPanel>
-                        <ui:TextBlock FontTypography="Subtitle" Text="{i18n:StringLocalizer settings.tts.chat_language}" />
+                        <StackPanel Orientation="Horizontal">
+                            <ui:SymbolIcon Symbol="Earth24" FontSize="36"/>
+                            <Border Width="8"/>
+                            <ui:TextBlock FontTypography="Subtitle" Text="{i18n:StringLocalizer settings.tts.chat_language}"
+                                VerticalAlignment="Bottom"/>
+                        </StackPanel>
                         <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="{i18n:StringLocalizer settings.tts.chat_language.japanese}" />
                         <ui:TextBlock FontTypography="BodyStrong" Margin="0,12,0,0" Text="{i18n:StringLocalizer settings.tts.chat_language.korean}" />
                     </StackPanel>
