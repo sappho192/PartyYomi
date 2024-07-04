@@ -37,5 +37,31 @@ namespace PartyYomi.Views.Pages
             ViewModel.SelectedUiLanguageIndex = comboBox.SelectedIndex;
             PartyYomiSettings.Instance.UiLanguages.CurrentLanguage = UILanguages.LanguageList[ViewModel.SelectedUiLanguageIndex];
         }
+
+        private void GlobalVolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var slider = sender as System.Windows.Controls.Slider;
+            ViewModel.GlobalVolume = (int)slider.Value;
+            PartyYomiSettings.Instance.VoiceSettings.GlobalVolume = ViewModel.GlobalVolume;
+        }
+
+        private void GlobalVolumeSlider_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ViewModel.GlobalVolume = 100;
+            PartyYomiSettings.Instance.VoiceSettings.GlobalVolume = 100;
+        }
+
+        private void GlobalRateSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var slider = sender as System.Windows.Controls.Slider;
+            ViewModel.GlobalRate = (int)slider.Value;
+            PartyYomiSettings.Instance.VoiceSettings.GlobalRate = ViewModel.GlobalRate;
+        }
+
+        private void GlobalRateSlider_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ViewModel.GlobalRate = 0;
+            PartyYomiSettings.Instance.VoiceSettings.GlobalRate = 0;
+        }
     }
 }

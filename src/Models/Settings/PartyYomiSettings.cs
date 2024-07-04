@@ -17,6 +17,7 @@ namespace PartyYomi.Models.Settings
         public ChatSettings? ChatSettings { get; set; }
         public UISettings? UiSettings { get; set; }
         public UILanguages? UiLanguages { get; set; }
+        public VoiceSettings? VoiceSettings { get; set; }
 
         [TraceMethod]
         public static PartyYomiSettings CreateDefault()
@@ -63,6 +64,11 @@ namespace PartyYomi.Models.Settings
                 UiLanguages = new UILanguages
                 {
                     CurrentLanguage = UILanguages.LanguageList.First()
+                },
+                VoiceSettings = new VoiceSettings
+                {
+                    GlobalVolume = 100,
+                    GlobalRate = 0
                 }
             };
             var serializer = new SerializerBuilder()
@@ -85,7 +91,16 @@ namespace PartyYomi.Models.Settings
                 {
                     ChatSettings?.EnabledChatChannels.Remove((ChatChannel)sender);
                 }
-            } 
+            }
+            if (group.Equals("Voice"))
+            {
+                if (name.Equals("GlobalVolume")) {
+                    GlobalSpeech.defaultTTS.Volume = (int)value;
+                }
+                else if (name.Equals("GlobalRate")) {
+                    GlobalSpeech.defaultTTS.Rate = (int)value;
+                }
+            }
 
             UpdateSettingsFile(this);
         }
@@ -121,6 +136,8 @@ namespace PartyYomi.Models.Settings
             settings.ChatSettings.EnabledChatChannels.CollectionChanged += EnabledChatChannels_CollectionChanged;
 
             settings.UiLanguages.OnSettingsChanged += (sender, name, value) => { settings.onSettingsChanged("UILanguages", sender, name, value); };
+
+            settings.VoiceSettings.OnSettingsChanged += (sender, name, value) => { settings.onSettingsChanged("Voice", sender, name, value); };
         }
 
         private static void EnabledChatChannels_CollectionChanged(in NotifyCollectionChangedEventArgs<ChatChannel> e)

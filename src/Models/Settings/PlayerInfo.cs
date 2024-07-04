@@ -1,5 +1,4 @@
 ﻿using PartyYomi.Helpers;
-using System.Windows.Controls;
 
 namespace PartyYomi.Models.Settings
 {

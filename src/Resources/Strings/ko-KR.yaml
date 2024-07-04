@@ -25,6 +25,11 @@ settings.game.chat.ignored_players_list: "채팅을 읽지 않을 플레이어 �
 settings.game.chat.enabled_channels_list: "TTS로 읽을 채널 목록 (클릭하여 편집)"
 
 settings.tts: "TTS"
+settings.tts.general: "음성 설정"
+settings.tts.general.preview: "들어보기"
+settings.tts.general.hint: "슬라이더를 더블클릭하여 초기화"
+settings.tts.general.volume: "음량"
+settings.tts.general.rate: "속도"
 settings.tts.chat_language: "채팅 언어별 설정"
 settings.tts.chat_language.japanese: "일본어"
 settings.tts.chat_language.korean: "한국어"

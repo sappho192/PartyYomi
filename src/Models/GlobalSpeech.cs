@@ -1,4 +1,5 @@
 ﻿using PartyYomi.Helpers;
+using PartyYomi.Models.Settings;
 using Serilog;
 using System.Diagnostics;
 using System.Speech.Synthesis;
@@ -31,6 +32,8 @@ namespace PartyYomi.Models
             }
 
             defaultTTS.SelectVoice("Microsoft Haruka Desktop");
+            defaultTTS.Volume = PartyYomiSettings.Instance.VoiceSettings.GlobalVolume;
+            defaultTTS.Rate = PartyYomiSettings.Instance.VoiceSettings.GlobalRate;
             return true;
         }
     }
