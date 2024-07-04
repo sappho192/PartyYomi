@@ -1,5 +1,6 @@
 ﻿using PartyYomi.FFXIV;
 using PartyYomi.Helpers;
+using PartyYomi.Models;
 using PartyYomi.Models.Settings;
 using Serilog;
 using Sharlayan.Core;
@@ -13,8 +14,6 @@ namespace PartyYomi.ViewModels.Windows
 {
     public partial class MainWindowViewModel : ObservableObject
     {
-        private readonly SpeechSynthesizer tts = new();
-
         public GameContext gameContext;
 
         public MainWindowViewModel()
@@ -56,36 +55,18 @@ namespace PartyYomi.ViewModels.Windows
                 //{
                 //    chatBox.Text += $"{sentence}{Environment.NewLine}";
                 //});
-                tts.SpeakAsync(sentence);
+                GlobalSpeech.defaultTTS.SpeakAsync(sentence);
             }
         }
 
         [TraceMethod]
-        private void InitTTS()
+        private static void InitTTS()
         {
-            tts.SetOutputToDefaultAudioDevice();
-            var list = tts.GetInstalledVoices().ToList();
-            // Exit if "Microsoft Haruka Desktop" is not installed
-            if (list.Find(x => x.VoiceInfo.Name == "Microsoft Haruka Desktop") == null)
+            if (!GlobalSpeech.Initialize())
             {
-                string message = Localizer.getString("main.tts.not_installed");
-                Log.Error(message);
-                if (System.Windows.MessageBox.Show(message) == System.Windows.MessageBoxResult.OK)
-                {
-                    var ps = new ProcessStartInfo("https://github.com/sappho192/PartyYomi/wiki/%EC%9C%88%EB%8F%84%EC%9A%B0-TTS-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0")
-                    {
-                        UseShellExecute = true,
-                        Verb = "open"
-                    };
-                    Process.Start(ps);
-                }
                 App.RequestShutdown();
             }
-
-            tts.SelectVoice("Microsoft Haruka Desktop");
-
-            // Speak in different thread
-            //tts.SpeakAsync("パーティー読みを開始します");
+            GlobalSpeech.defaultTTS.SpeakAsync("パーティー読みを起動します");
         }
 
         [ObservableProperty]
