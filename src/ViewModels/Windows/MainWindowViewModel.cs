@@ -87,7 +87,7 @@ namespace PartyYomi.ViewModels.Windows
         [
             new NavigationViewItem()
             {
-                Content = Localizer.getString("main.navigation.settings"),
+                Content = Localizer.GetString("main.navigation.settings"),
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
                 TargetPageType = typeof(Views.Pages.SettingsPage)
             }

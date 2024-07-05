@@ -17,7 +17,7 @@ namespace PartyYomi.Models
             // Exit if "Microsoft Haruka Desktop" is not installed
             if (list.Find(x => x.VoiceInfo.Name == "Microsoft Haruka Desktop") == null)
             {
-                string message = Localizer.getString("main.tts.not_installed");
+                string message = Localizer.GetString("main.tts.not_installed");
                 Log.Error(message);
                 if (System.Windows.MessageBox.Show(message) == System.Windows.MessageBoxResult.OK)
                 {

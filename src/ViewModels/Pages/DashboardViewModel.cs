@@ -20,9 +20,9 @@ namespace PartyYomi.ViewModels.Pages
         [ObservableProperty]
         private bool _isSpeechActive = true;
         [ObservableProperty]
-        private string _speechToggleState = Localizer.getString("dashboard.tts.enabled");
+        private string _speechToggleState = Localizer.GetString("dashboard.tts.enabled");
         [ObservableProperty]
-        private string _speechToggleDescription = Localizer.getString("dashboard.tts.enabled.description");
+        private string _speechToggleDescription = Localizer.GetString("dashboard.tts.enabled.description");
         [ObservableProperty]
         private string _speechIcon = "DesktopSpeaker20";
         [ObservableProperty]
@@ -77,10 +77,10 @@ namespace PartyYomi.ViewModels.Pages
         private static void AskToUpdate(Version? currentVersion, Release latestRelease, Version latestVersion)
         {
             var sb = new StringBuilder();
-            sb.AppendLine(Localizer.getString("main.update.description"));
+            sb.AppendLine(Localizer.GetString("main.update.description"));
             sb.AppendLine();
-            sb.AppendLine($"{Localizer.getString("main.update.current_version")}{currentVersion.ToString(3)}");
-            sb.AppendLine($"{Localizer.getString("main.update.latest_version")}**{latestVersion.ToString(3)}**");
+            sb.AppendLine($"{Localizer.GetString("main.update.current_version")}{currentVersion.ToString(3)}");
+            sb.AppendLine($"{Localizer.GetString("main.update.latest_version")}**{latestVersion.ToString(3)}**");
             sb.AppendLine();
             sb.AppendLine(latestRelease.Body);
             var updateContent = sb.ToString();
@@ -96,11 +96,11 @@ namespace PartyYomi.ViewModels.Pages
             };
             var updateMessageBox = new Wpf.Ui.Controls.MessageBox
             {
-                Title = Localizer.getString("main.update.title"),
+                Title = Localizer.GetString("main.update.title"),
                 Content = scrollViewer,
                 IsPrimaryButtonEnabled = true,
-                PrimaryButtonText = Localizer.getString("yes"),
-                CloseButtonText = Localizer.getString("no")
+                PrimaryButtonText = Localizer.GetString("yes"),
+                CloseButtonText = Localizer.GetString("no")
             };
             var result = updateMessageBox.ShowDialogAsync();
             if (result.Result == Wpf.Ui.Controls.MessageBoxResult.Primary)
@@ -121,15 +121,15 @@ namespace PartyYomi.ViewModels.Pages
         {
             if (IsSpeechActive)
             {
-                SpeechToggleState = Localizer.getString("dashboard.tts.enabled");
-                SpeechToggleDescription = Localizer.getString("dashboard.tts.enabled.description");
+                SpeechToggleState = Localizer.GetString("dashboard.tts.enabled");
+                SpeechToggleDescription = Localizer.GetString("dashboard.tts.enabled.description");
                 SpeechIcon = "DesktopSpeaker20";
                 PartyYomiSettings.Instance.UiSettings.IsTtsEnabled = true;
             }
             else
             {
-                SpeechToggleState = Localizer.getString("dashboard.tts.disabled");
-                SpeechToggleDescription = Localizer.getString("dashboard.tts.disabled.description");
+                SpeechToggleState = Localizer.GetString("dashboard.tts.disabled");
+                SpeechToggleDescription = Localizer.GetString("dashboard.tts.disabled.description");
                 SpeechIcon = "DesktopSpeakerOff20";
                 PartyYomiSettings.Instance.UiSettings.IsTtsEnabled = false;
             }

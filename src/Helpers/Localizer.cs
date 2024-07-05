@@ -4,7 +4,7 @@ namespace PartyYomi.Helpers
 {
     public class Localizer
     {
-        public static string getString(string key)
+        public static string GetString(string key)
         {
             var localizationProvider = LocalizationProviderFactory.GetInstance();
             var currentCulture = localizationProvider.GetCulture();
@@ -16,6 +16,13 @@ namespace PartyYomi.Helpers
         {
             var localizationProvider = LocalizationProviderFactory.GetInstance();
             localizationProvider.SetCulture(new(languageCode));
+        }
+
+        public static string GetSpecificString(string key, string languageCode)
+        {
+            var localizationProvider = LocalizationProviderFactory.GetInstance();
+            var localizationSet = localizationProvider.GetLocalizationSet(languageCode);
+            return localizationSet[key];
         }
     }
 }
