@@ -199,7 +199,7 @@
                         </ui:CardControl>
                     </StackPanel>
                     <Border Height="16"/>
-                    <StackPanel>
+                    <StackPanel Visibility="Collapsed">
                         <StackPanel Orientation="Horizontal">
                             <ui:SymbolIcon Symbol="Earth24" FontSize="36"/>
                             <Border Width="8"/>
