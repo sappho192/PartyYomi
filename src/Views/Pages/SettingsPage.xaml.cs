@@ -6,6 +6,7 @@ namespace PartyYomi.Views.Pages
 {
     public partial class SettingsPage : INavigableView<SettingsViewModel>
     {
+        private bool _isInitialized;
         public SettingsViewModel ViewModel { get; }
 
         public SettingsPage(SettingsViewModel viewModel)
@@ -14,6 +15,7 @@ namespace PartyYomi.Views.Pages
             DataContext = this;
 
             InitializeComponent();
+            _isInitialized = true;
         }
 
         private void ListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -33,6 +35,7 @@ namespace PartyYomi.Views.Pages
 
         private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            if (!_isInitialized) return;
             var comboBox = sender as System.Windows.Controls.ComboBox;
             ViewModel.SelectedUiLanguageIndex = comboBox.SelectedIndex;
             PartyYomiSettings.Instance.UiLanguages.CurrentLanguage = UILanguages.LanguageList[ViewModel.SelectedUiLanguageIndex];

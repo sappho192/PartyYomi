@@ -61,7 +61,14 @@ namespace PartyYomi.ViewModels.Pages
         {
             CurrentTheme = ApplicationThemeManager.GetAppTheme();
             AppVersion = $"PartyYomi - {GetAssemblyVersion()}";
-            SelectedUiLanguageIndex = UILanguages.LanguageList.IndexOf(PartyYomiSettings.Instance.UiLanguages.CurrentLanguage);
+            for (int i = 0; i < UILanguages.LanguageList.Count; i++)
+            {
+                if (UILanguages.LanguageList[i].Code == PartyYomiSettings.Instance.UiLanguages.CurrentLanguage.Code)
+                {
+                    SelectedUiLanguageIndex = i;
+                    break;
+                }
+            }
 
             _isInitialized = true;
         }
