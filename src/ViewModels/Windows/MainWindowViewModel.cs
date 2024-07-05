@@ -1,4 +1,5 @@
-﻿using PartyYomi.FFXIV;
+﻿using Octokit;
+using PartyYomi.FFXIV;
 using PartyYomi.Helpers;
 using PartyYomi.Models;
 using PartyYomi.Models.Settings;
@@ -6,8 +7,7 @@ using Serilog;
 using Sharlayan.Core;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Diagnostics;
-using System.Speech.Synthesis;
+using System.Reflection;
 using Wpf.Ui.Controls;
 
 namespace PartyYomi.ViewModels.Windows

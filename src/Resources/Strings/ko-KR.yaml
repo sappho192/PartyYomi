@@ -1,8 +1,15 @@
 ﻿add: "추가"
 remove: "제거"
+yes: "예"
+no: "아니요"
 
 main.tts.not_installed: "Microsoft Haruka Desktop 음성을 설치해주세요."
 main.navigation.settings: "설정"
+
+main.update.title: "업데이트 가능"
+main.update.description: "**PartyYomi의 새 버전이 있습니다. 다운로드 하시겠습니까?**"
+main.update.current_version: "현재 버전: "
+main.update.latest_version: "새 버전: "
 
 dashboard.tts.enabled: "TTS 작동 중"
 dashboard.tts.enabled.description: "게임 내 채팅을 읽을 준비가 되어있습니다."

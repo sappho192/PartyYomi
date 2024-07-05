@@ -114,7 +114,7 @@ namespace PartyYomi
                 .MinimumLevel.Debug()
                 .WriteTo.File($"logs/{date}.txt")
                 .CreateLogger();
-            Log.Information($"PartyYomi {Assembly.GetExecutingAssembly().GetName().Version} started.");
+            Log.Information($"PartyYomi {Assembly.GetExecutingAssembly().GetName().Version.ToString(3)} started.");
         }
 
         [TraceMethod]

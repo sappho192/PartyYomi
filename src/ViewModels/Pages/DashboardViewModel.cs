@@ -1,6 +1,14 @@
-﻿using ObservableCollections;
+﻿using MdXaml;
+using ObservableCollections;
+using Octokit;
 using PartyYomi.Helpers;
 using PartyYomi.Models.Settings;
+using Serilog;
+using System.Diagnostics;
+using System.Reflection;
+using System.Text;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using Wpf.Ui;
 
 namespace PartyYomi.ViewModels.Pages
@@ -39,6 +47,72 @@ namespace PartyYomi.ViewModels.Pages
                 _isSpeechActive = false;
             }
             OnSpeechToggle();
+
+            // run CheckUpdate() in different thread
+            System.Windows.Application.Current.Dispatcher.InvokeAsync(CheckUpdate);
+        }
+
+        [TraceMethod]
+        private void CheckUpdate()
+        {
+            var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+            var githubClient = new GitHubClient(new ProductHeaderValue("PartyYomi"));
+            var latestRelease = githubClient.Repository.Release.GetLatest("sappho192", "partyyomi").Result;
+            var latestVersion = new Version(latestRelease.TagName);
+
+            if (currentVersion.CompareTo(latestVersion) >= 0)
+            {
+                Log.Information("PartyYomi is up to date");
+            }
+            else
+            {
+                Log.Information("PartyYomi is outdated");
+                Log.Information($"Current version: {currentVersion}");
+                Log.Information($"Latest version: {latestVersion}");
+
+                AskToUpdate(currentVersion, latestRelease, latestVersion);
+            }
+        }
+
+        private static void AskToUpdate(Version? currentVersion, Release latestRelease, Version latestVersion)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine(Localizer.getString("main.update.description"));
+            sb.AppendLine();
+            sb.AppendLine($"{Localizer.getString("main.update.current_version")}{currentVersion.ToString(3)}");
+            sb.AppendLine($"{Localizer.getString("main.update.latest_version")}**{latestVersion.ToString(3)}**");
+            sb.AppendLine();
+            sb.AppendLine(latestRelease.Body);
+            var updateContent = sb.ToString();
+            var markdownEngine = new Markdown();
+            FlowDocument document = markdownEngine.Transform(updateContent);
+            document.FontFamily = new System.Windows.Media.FontFamily("sans-serif");
+            var scrollViewer = new ScrollViewer
+            {
+                Content = new RichTextBox
+                {
+                    Document = document
+                }
+            };
+            var updateMessageBox = new Wpf.Ui.Controls.MessageBox
+            {
+                Title = Localizer.getString("main.update.title"),
+                Content = scrollViewer,
+                IsPrimaryButtonEnabled = true,
+                PrimaryButtonText = Localizer.getString("yes"),
+                CloseButtonText = Localizer.getString("no")
+            };
+            var result = updateMessageBox.ShowDialogAsync();
+            if (result.Result == Wpf.Ui.Controls.MessageBoxResult.Primary)
+            {
+                Log.Information("User clicked Yes to update PartyYomi");
+                var ps = new ProcessStartInfo(latestRelease.Assets[0].BrowserDownloadUrl)
+                {
+                    UseShellExecute = true,
+                    Verb = "open"
+                };
+                Process.Start(ps);
+            }
         }
 
         [TraceMethod]

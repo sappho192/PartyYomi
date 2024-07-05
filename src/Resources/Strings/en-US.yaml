@@ -1,8 +1,15 @@
 ﻿add: "Add"
 remove: "Remove"
+yes: "Yes"
+no: "No"
 
 main.tts.not_installed: "Please install the TTS voice: Microsoft Haruka Desktop"
 main.navigation.settings: "Settings"
+
+main.update.title: "Update available"
+main.update.description: "**A new version of PartyYomi is available. Would you like to download?**"
+main.update.current_version: "Current version: "
+main.update.latest_version: "New version: "
 
 dashboard.tts.enabled: "TTS is enabled"
 dashboard.tts.enabled.description: "Ready to read in-game chat."

@@ -68,7 +68,7 @@ namespace PartyYomi.ViewModels.Pages
 
         private string GetAssemblyVersion()
         {
-            return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
+            return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)
                 ?? string.Empty;
         }
 
