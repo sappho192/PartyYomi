@@ -7,7 +7,7 @@
             int index = value.IndexOf(character);
             if (index > 0)
             {
-                value = value.Substring(0, index);
+                value = value[..index];
             }
             return value;
         }
@@ -17,7 +17,7 @@
             int index = value.IndexOf(character);
             if (index > 0)
             {
-                value = value.Substring(index + 1);
+                value = value[(index + 1)..];
             }
             return value;
         }
