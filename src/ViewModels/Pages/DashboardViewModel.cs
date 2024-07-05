@@ -63,6 +63,7 @@ namespace PartyYomi.ViewModels.Pages
             if (currentVersion.CompareTo(latestVersion) >= 0)
             {
                 Log.Information("PartyYomi is up to date");
+                //AskToUpdate(currentVersion, latestRelease, latestVersion);
             }
             else
             {
@@ -91,7 +92,8 @@ namespace PartyYomi.ViewModels.Pages
             {
                 Content = new RichTextBox
                 {
-                    Document = document
+                    Document = document,
+                    IsReadOnly = true,
                 }
             };
             var updateMessageBox = new Wpf.Ui.Controls.MessageBox
