@@ -1,4 +1,5 @@
-﻿using PartyYomi.Models.Settings;
+﻿using PartyYomi.Helpers;
+using PartyYomi.Models.Settings;
 using PartyYomi.ViewModels.Pages;
 using Wpf.Ui.Controls;
 
@@ -39,6 +40,13 @@ namespace PartyYomi.Views.Pages
             var comboBox = sender as System.Windows.Controls.ComboBox;
             ViewModel.SelectedUiLanguageIndex = comboBox.SelectedIndex;
             PartyYomiSettings.Instance.UiLanguages.CurrentLanguage = UILanguages.LanguageList[ViewModel.SelectedUiLanguageIndex];
+
+            if (comboBox.IsVisible)
+            {
+                System.Windows.MessageBox.Show(Localizer.GetSpecificString(
+                    "settings.general.language.comment", 
+                    PartyYomiSettings.Instance.UiLanguages.CurrentLanguage.Code));
+            }
         }
 
         private void GlobalVolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
