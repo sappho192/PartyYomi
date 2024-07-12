@@ -66,8 +66,4 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="FFXIV\" />
-  </ItemGroup>
-
 </Project>
